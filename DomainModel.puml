@@ -1,17 +1,25 @@
 @startuml
 package ConnectHobby {
-  class User {
-     + UserID: int
-     + Name: String
-     + Email: String
-     + Password: String
-     + PhoneNumber: String
+  class Person {
+     + id: int
+     + first_name: String
+     + last_name: String
+     + email: String
+     + birth_date: LocalDate
+     + home_phone_number: String
+     + work_phone_number: String
+     + mobile_phone_number: String
+     + address: Address
+     + creation_date: LocalDate
+
+
   }
 
   class Address {
-     + AddressID: int
-     + StreetName: String
-     + HouseNumber: String
+     + zip: int
+     + cityName: String
+     + regionName: String
+     + MunicipalityName: String
   }
 
   class ZipCode {
@@ -42,17 +50,18 @@ package ConnectHobby {
      + DateTime: DateTime
      + Location: String
      + RegistrationFee: double
-     + Host: User
+     + Host: Person
+     + Attendee: Person
   }
 
 
-  User "n" --> "1" Address : lives at >
+  Person "n" --> "1" Address : lives at >
   Address "n" --> "1" ZipCode : is in >
-  User "1" -- "n" Hobby : has >
+  Person "1" -- "n" Hobby : has >
   Hobby "n" --> "1" Category : belongs to >
   Hobby "n" --> "1" Type : belongs to >
-  User "n" -- "m" Event : attends >
-  User "1" -- "n" Event : hosts >
+  Person "n" -- "m" Event : attends >
+  Person "1" -- "n" Event : hosts >
   Hobby "1" -- "n" Event : relates >
 }
 @enduml
