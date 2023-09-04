@@ -23,6 +23,7 @@ public class Address {
     private Zip zip;
 
     @OneToMany(mappedBy = "address", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @ToString.Exclude
     private final Set<Person> person = new HashSet<>();
 
     public Address(String street, Zip zip) {

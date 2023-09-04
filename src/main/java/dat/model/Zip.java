@@ -31,5 +31,6 @@ public class Zip {
     private String municipalityName;
 
     @OneToMany(mappedBy = "zip")
+    @ToString.Exclude
     private Set<Address> address = new HashSet<>();
 }
