@@ -20,8 +20,6 @@ Begivenheds Registrering: Hver begivenhed kan have en detaljeret side, der nævn
 
 Begivenheds Hosting: Premium-brugere kan være vært for deres egne begivenheder, sætte kriterier for deltagerne og opkræve gebyrer.
 
-Feedback og Vurderinger: Efter begivenheden kan deltagerne vurdere begivenheden og give feedback. Dette hjælper med at opretholde kvaliteten af ​​begivenhederne på platformen og giver begivenhedsværter indsigt i forbedringsområder.
-Læringshub: En sektion, hvor brugere kan finde ressourcer, vejledninger og kurser relateret til deres hobbyer. Disse ressourcer kan være gratis eller betalte.
 
 ###Monetarisering:
 
