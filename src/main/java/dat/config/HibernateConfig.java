@@ -1,6 +1,8 @@
 package dat.config;
 
 import dat.model.*;
+import dat.services.HobbyCategoryConverter;
+import dat.services.HobbyTypeConverter;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
@@ -49,6 +51,9 @@ public class HibernateConfig {
                 Person.class,
                 PersonHobby.class,
                 Zip.class);
+
+        configuration.addAttributeConverter(HobbyTypeConverter.class);
+        configuration.addAttributeConverter(HobbyCategoryConverter.class);
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties())
