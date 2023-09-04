@@ -45,12 +45,6 @@ package ConnectHobby {
      + Host: User
   }
 
-  class Feedback {
-     + FeedbackID: int
-     + Content: String
-     + Rating: int
-     + Author: User
-  }
 
   User "n" --> "1" Address : lives at >
   Address "n" --> "1" ZipCode : is in >
@@ -60,8 +54,6 @@ package ConnectHobby {
   User "n" -- "m" Event : attends >
   User "1" -- "n" Event : hosts >
   Hobby "1" -- "n" Event : relates >
-  Event "1" -- "n" Feedback : receives >
-  User "1" -- "n" Feedback : writes >
 }
 @enduml
 

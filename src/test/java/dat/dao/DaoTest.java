@@ -136,16 +136,23 @@ public class DaoTest {
     @Test
     void testGetAllByHobby() { // TODO: DTO with hobbies and count of persons (List<HobbyDTO>)
         // Create new hobby
+        Hobby hobby = createTestHobby(1);
 
         // Create 3 new person
+        Person person1 = createTestPerson(1);
+        Person person2 = createTestPerson(2);
+        Person person3 = createTestPerson(3);
 
         // Set hobby for 2 persons
+        person1.addHobby(hobby);
+        person2.addHobby(hobby);
+
 
         // Get all persons with hobby from DB
-
-        // Check persons
+        List<Person> persons = personDAO.getAllByHobby(hobby);
 
         // Check count
+        assertEquals(2, persons.size());
     }
 
     @Test
@@ -167,12 +174,19 @@ public class DaoTest {
     @Test
     void testGetAllByZip() {
         // Create 3 new person
+        Person person1 = createTestPerson(1);
+        Person persen2 = createTestPerson(2);
+        Person person3 = createTestPerson(3);
 
         // Set zip for 2 persons
+        person1.getAddress().setZip("3330");
+        person2.getAddress().setZip("3330");
 
         // Get all persons with zip from DB
+        List<Person> persons = personDAO.getAllByZip("3330");
 
         // Check persons
+        assertEquals(2, persons.size());
     }
 
     @Test
@@ -185,12 +199,18 @@ public class DaoTest {
     @Test
     void testGetPersonByMobile() {
         // Create 2 new person
+        Person person1 = createTestPerson(1);
+        Person person2 = createTestPerson(2);
 
         // Set mobile for 2 persons
+        person1.setMobilePhoneNumber("12345678");
+        person2.setMobilePhoneNumber("12345679");
 
         // Get person with mobile from DB
+        Person person = personDAO.getAllByMobile("12345678");
 
         // Check person
+        assertEquals(person1.getId(), person.getId());
     }
 
     @Test
