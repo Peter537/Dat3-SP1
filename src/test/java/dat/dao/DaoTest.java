@@ -89,7 +89,7 @@ public class DaoTest {
     @Test
     void testGetHobby() {
         // Get hobby from DB
-        Hobby hobbyFromDB = personDAO.findById(Hobby.class, 1);
+        Hobby hobbyFromDB = hobbyDAO.findById(Hobby.class, 1);
 
         // Check fields
     }
