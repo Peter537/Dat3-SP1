@@ -44,9 +44,9 @@ public class Person {
     @Column(name = "mobile_phone_number", length = 8, nullable = false, unique = true)
     private String mobilePhoneNumber;
 
-    @ManyToMany(mappedBy = "persons", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.MERGE, orphanRemoval = true)
     @ToString.Exclude
-    private Set<Hobby> hobbies = new HashSet<>();
+    private Set<PersonHobby> hobbies = new HashSet<>();
 
     @ManyToOne
     private Address address;
@@ -61,10 +61,11 @@ public class Person {
         this.mobilePhoneNumber = mobilePhoneNumber;
     }
 
-    public void addHobby(Hobby hobby) {
+    public void addHobby(Hobby hobby, Integer rating) {
         if (hobby != null) {
-            this.hobbies.add(hobby);
-            hobby.getPersons().add(this);
+            PersonHobby personHobby = new PersonHobby(this, hobby, rating);
+            this.hobbies.add(personHobby);
+            hobby.getPersons().add(personHobby);
         }
     }
 }

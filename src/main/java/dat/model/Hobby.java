@@ -29,7 +29,7 @@ public class Hobby {
     @Column(name = "type", nullable = false)
     private HobbyType type;
 
-    @ManyToMany(mappedBy = "hobbies", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "hobby", cascade = CascadeType.MERGE, orphanRemoval = true)
     @ToString.Exclude
-    private final Set<Person> persons = new HashSet<>();
+    private final Set<PersonHobby> persons = new HashSet<>();
 }
