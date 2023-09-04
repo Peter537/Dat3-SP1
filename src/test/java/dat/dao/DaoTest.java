@@ -335,10 +335,8 @@ public class DaoTest {
 
         Address address = new Address("TestStreet", zip);
         addressDAO.save(address);
-
-
-
-        Event event = new Event(person, hobby, address.toString(), "Test", 0.0, LocalDate.now());
+        
+        Event event = new Event(person, hobby, address.getStreet(), "Test", 0.0, LocalDate.now());
 
         // Create new person
         // Add person to event
