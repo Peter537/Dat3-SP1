@@ -21,6 +21,11 @@ abstract class ADAO<T> implements IDAO<T> { // TODO: Add tcf (try, catch, final)
         this.emf = emf;
     }
 
+    // Getters
+    public EntityManagerFactory getEntityManagerFactory() {
+        return emf;
+    }
+
     // Queries
     public T findById(Class<T> tClass, Object id) {
         try (EntityManager entityManager = emf.createEntityManager()) {

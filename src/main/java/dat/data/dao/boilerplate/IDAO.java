@@ -13,9 +13,14 @@ interface IDAO<T> {
 
     /**
      *
-     * @param emf
+     * @param emf EntityManagerFactory
      */
     void setEntityManagerFactory(EntityManagerFactory emf);
+
+    /**
+     * @return EntityManagerFactory
+     */
+    EntityManagerFactory getEntityManagerFactory();
 
     /**
      *
