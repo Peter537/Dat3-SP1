@@ -453,6 +453,9 @@ public class DaoTest {
         event.getAttendees().add(person);
         eventDAO.save(event);
 
+        eventDAO.getEventsByPerson(person);
+        assertEquals(person.getFirstName(), event.getCreatedBy().getFirstName());
+
 
         
 
