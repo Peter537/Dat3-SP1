@@ -56,7 +56,7 @@ package ConnectHobby {
   Address "n" --> "1" ZipCode : is in >
   User "1" -- "n" Hobby : has >
   Hobby "n" --> "1" Category : belongs to >
-  Hobby "n" --> "1" Type : has >
+  Hobby "n" --> "1" Type : belongs to >
   User "n" -- "m" Event : attends >
   User "1" -- "n" Event : hosts >
   Hobby "1" -- "n" Event : relates >
