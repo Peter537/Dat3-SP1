@@ -17,22 +17,18 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "street")
     private String street;
-
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Zip zip;
 
     @OneToMany(mappedBy = "address", cascade = CascadeType.MERGE, orphanRemoval = true)
-    private Set<Person> person = new HashSet<>();
-
-
-
+    private final Set<Person> person = new HashSet<>();
 
     public Address(String street, Zip zip) {
         this.street = street;
         this.zip = zip;
     }
-
 }

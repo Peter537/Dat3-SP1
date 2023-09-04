@@ -20,15 +20,16 @@ public class Zip {
     @Id
     @Column(name = "zip")
     private int zip;
+
     @Column(name = "city_name")
-    private String city_name;
+    private String cityName;
+
     @Column(name = "region_name")
-    private String region_name;
+    private String regionName;
+
     @Column(name = "municipality_name")
-    private String municipality_name;
+    private String municipalityName;
 
     @OneToMany(mappedBy = "zip")
     private Set<Address> address = new HashSet<>();
-
-
 }
