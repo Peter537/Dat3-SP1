@@ -187,15 +187,15 @@ public class DaoTest {
         assertEquals(3, hobbies.size());
     }
 
-     @Test
-     void getAllHobbiesWithPersonCount() {
-         // Create 3 new hobby
-         Hobby hobby1 = createTestHobby(1);
-            Hobby hobby2 = createTestHobby(2);
-            Hobby hobby3 = createTestHobby(3);
-            hobbyDAO.save(hobby1);
-            hobbyDAO.save(hobby2);
-            hobbyDAO.save(hobby3);
+    @Test
+    void getAllHobbiesWithPersonCount() {
+        // Create 3 new hobby
+        Hobby hobby1 = createTestHobby(1);
+        Hobby hobby2 = createTestHobby(2);
+        Hobby hobby3 = createTestHobby(3);
+        hobbyDAO.save(hobby1);
+        hobbyDAO.save(hobby2);
+        hobbyDAO.save(hobby3);
 
         // Create 3 new person
         Person person1 = createTestPerson(1);
@@ -226,7 +226,7 @@ public class DaoTest {
                 assertEquals(0, hobby.count());
             }
         }
-     }
+    }
 
     @Test
     void testGetAllByZip() {
@@ -433,35 +433,31 @@ public class DaoTest {
     @Test
     void testGetEventByPerson() {
 
-
+// Create new person
         Person person = createTestPerson(1);
         personDAO.save(person);
 
+        // Create new hobby
         Hobby hobby = createTestHobby(1);
         hobbyDAO.save(hobby);
 
+        // Create new address and zip
         Zip zip = new Zip(3300, "Yes", "Yep", "Yup");
         zipDAO.save(zip);
 
+        // Create new address and zip and then the event object
+
         Address address = new Address("TestStreet", zip);
         addressDAO.save(address);
-
         Event event = new Event(person, hobby, address.getStreet(), "Test", 0.0, LocalDate.now());
 
-        // Create new person
         // Add person to event
         event.getAttendees().add(person);
         eventDAO.save(event);
 
+        //Get event from DB and check
         eventDAO.getEventsByPerson(person);
         assertEquals(person.getFirstName(), event.getCreatedBy().getFirstName());
-
-
-        
-
-        // Get event from DB
-
-        // Check event
     }
 
 
