@@ -2,6 +2,7 @@ package dat.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.util.Set;
 @Entity
 @Setter
 @Getter
+@NoArgsConstructor
 public class Event {
 
     @Id

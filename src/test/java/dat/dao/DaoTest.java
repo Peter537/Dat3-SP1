@@ -294,14 +294,20 @@ public class DaoTest {
     @Test
     void testGetEventByPerson() {
 
+
+        Person person = createTestPerson(1);
+        personDAO.save(person);
+
         // Create new event
-        Event event = new Event();
-        event.setCreatedBy(createTestPerson(1));
+        Event event = new Event()
+        event.setCreatedBy();
         event.setEventDate(LocalDate.now());
         event.setAddress(new Address("TestStreet", new Zip(3300, "Yes", "Yep", "Yup")));
         event.setDescription("TestDescription");
         event.setPrice(100.0);
         event.setHobby(createTestHobby(1));
+
+        Event event = new Event(person, new Hobby(), new Address("Horsebakken 5D"), "Test", 0.0, LocalDate.now());
 
         // Create new person
         Person person = new Person("Jensss", "Jensssen", "bruh@emasil.com", LocalDate.now(), "12345676", "12345618", "12345670");
