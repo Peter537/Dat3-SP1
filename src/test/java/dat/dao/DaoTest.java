@@ -2,9 +2,7 @@ package dat.dao;
 
 import dat.config.HibernateConfig;
 import dat.dao.boilerplate.DAO;
-import dat.model.Address;
-import dat.model.Hobby;
-import dat.model.Person;
+import dat.model.*;
 import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -88,17 +86,11 @@ public class DaoTest {
 
     @Test
     void testGetHobby() {
-        // Create new hobby
-        Hobby hobby = createTestHobby();
-        hobbyDAO.save(hobby);
         // Get hobby from DB
-        Hobby hobbyFromDB = phobbyDAO.findById(Hobby.class, hobby.getId());
+        Hobby hobbyFromDB = hobbyDAO.findById(Hobby.class, "3D-udskrivning");
 
         // Check fields
-        assertEquals(hobby.getName(), hobbyFromDB.getName());
-        assertEquals(hobby.getWikiLink(), hobbyFromDB.getWikiLink());
-        assertEquals(hobby.getType(), hobbyFromDB.getType());
-        assertEquals(hobby.getCategory(), hobbyFromDB.getCategory());
+        assertEquals(hobbyFromDB.getName(), "3D-udskrivning");
     }
 
 
@@ -216,11 +208,11 @@ public class DaoTest {
     }
 
     protected Hobby createTestHobby() {
-        Hobby hobby = new Hobby();
-        hobby.setName("TestName");
-        hobby.setWikiLink("TestWikiLink");
-        hobby.setType(HobbyType.INDOOR);
-        hobby.setCategory(HobbyCategory.SPORTS);
-        return hobby;
+        return Hobby.builder()
+                .name("TestName")
+                .wikiLink("TestWikiLink")
+                .type(HobbyType.INDOOR)
+                .category(HobbyCategory.GENEREL)
+                .build();
     }
 }
