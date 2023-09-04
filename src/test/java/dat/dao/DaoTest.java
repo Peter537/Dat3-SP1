@@ -1,6 +1,7 @@
 package dat.dao;
 
 import dat.config.HibernateConfig;
+import dat.data.dao.EventDAO;
 import dat.data.dao.HobbyDAO;
 import dat.data.dao.PersonDAO;
 import dat.data.dao.boilerplate.DAO;
@@ -23,7 +24,7 @@ public class DaoTest {
     HobbyDAO hobbyDAO = HobbyDAO.getInstance();
     DAO<Address> addressDAO = new DAO<>();
     DAO<Zip> zipDAO = new DAO<>();
-    DAO<Event> eventDAO = new DAO<>();
+    EventDAO eventDAO = EventDAO.getInstance();
 
 
     @BeforeEach
@@ -390,16 +391,28 @@ public class DaoTest {
     }
 
     @Test
-    void testGetEventByHobby() {
+    void testGetEventsByHobby() {
         // Create new event
+        Person person = createTestPerson(1);
+        personDAO.save(person);
 
-        // Create new hobby
+        Hobby hobby = createTestHobby(1);
+        hobbyDAO.save(hobby);
 
-        // Add hobby to event
+        Zip zip = new Zip(3300, "Yes", "Yep", "Yup");
+        zipDAO.save(zip);
+
+        Address address = new Address("TestStreet", zip);
+        addressDAO.save(address);
+        Event event = new Event(person, hobby, address.getStreet(), "Test", 0.0, LocalDate.now());
+        eventDAO.save(event);
 
         // Get event from DB
+        List<Event> events = eventDAO.getEventsByHobby(hobby);
 
         // Check event
+        assertEquals(1, events.size());
+        assertEquals(event.getName(), events.get(0).getName());
     }
 
     @Test
