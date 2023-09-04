@@ -66,8 +66,4 @@ public class Person {
             hobby.getPersons().add(this);
         }
     }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 }
