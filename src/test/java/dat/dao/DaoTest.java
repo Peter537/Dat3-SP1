@@ -328,7 +328,7 @@ public class DaoTest {
 
 
 
-        Event event = new Event(person, hobby,address, "Test", 0.0, LocalDate.now());
+        Event event = new Event(person, hobby, address.getStreet(), "Test", 0.0, LocalDate.now());
 
         // Create new person
         // Add person to event
