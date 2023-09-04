@@ -282,12 +282,18 @@ public class DaoTest {
     @Test
     void testGetHobbiesByType() {
         // Create 3 new hobby
-
-        // Set type for 2 hobbies
+        Hobby hobby1 = createTestHobby(1);
+        Hobby hobby2 = createTestHobby(2);
+        Hobby hobby3 = createTestHobby(3);
+        hobbyDAO.save(hobby1);
+        hobbyDAO.save(hobby2);
+        hobbyDAO.save(hobby3);
 
         // Get hobbies with type from DB
+        List<Hobby> hobbies = hobbyDAO.getHobbiesByType(HobbyType.INDOOR);
 
         // Check hobbies
+        assertEquals(3, hobbies.size());
     }
 
     @Test
