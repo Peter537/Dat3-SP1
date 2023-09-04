@@ -315,22 +315,44 @@ public class DaoTest {
     @Test
     void testGetHobbiesByType() {
         // Create 3 new hobby
-
-        // Set type for 2 hobbies
+        Hobby hobby1 = createTestHobby(1);
+        Hobby hobby2 = createTestHobby(2);
+        Hobby hobby3 = createTestHobby(3);
+        hobbyDAO.save(hobby1);
+        hobbyDAO.save(hobby2);
+        hobbyDAO.save(hobby3);
 
         // Get hobbies with type from DB
+        List<Hobby> hobbies = hobbyDAO.getHobbiesByType(HobbyType.INDOOR);
 
         // Check hobbies
+        assertEquals(3, hobbies.size());
     }
 
     @Test
     void testCreateEvent() {
         // Create new event
 
+        Person person = createTestPerson(1);
+        personDAO.save(person);
+
+        Hobby hobby = createTestHobby(1);
+        hobbyDAO.save(hobby);
+
+        Zip zip = new Zip(3300, "Yes", "Yep", "Yup");
+        zipDAO.save(zip);
+
+        Address address = new Address("TestStreet", zip);
+        addressDAO.save(address);
+
+
+
+        Event event = new Event(person, hobby, address.getStreet(), "Test", 0.0, LocalDate.now());
         // Create new person
 
         // Add person to event
-
+        event.getAttendees().add(person);
+        eventDAO.save(event);
         // Create new hobby
 
         // Add hobby to event
@@ -338,6 +360,33 @@ public class DaoTest {
         // Get event from DB
 
         // Check event
+    }
+
+    @Test
+    void testJoinEvent() {
+        Person person = createTestPerson(1);
+        personDAO.save(person);
+
+        Hobby hobby = createTestHobby(1);
+        hobbyDAO.save(hobby);
+
+        Zip zip = new Zip(3300, "Yes", "Yep", "Yup");
+        zipDAO.save(zip);
+
+        Address address = new Address("TestStreet", zip);
+        addressDAO.save(address);
+
+
+
+        Event event = new Event(person, hobby, address.getStreet(), "Test", 0.0, LocalDate.now());
+        // Create new person
+
+        // Add person to event
+        event.getAttendees().add(person);
+        eventDAO.save(event);
+// sout the the attendees
+        System.out.println(event.getAttendees());
+        assertEquals(1, event.getAttendees().size());
     }
 
     @Test
