@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -24,7 +25,7 @@ public class Hobby {
 
     @ManyToMany(mappedBy = "hobbies", fetch = FetchType.EAGER)
     @ToString.Exclude
-    private List<Person> persons;
+    private Set<Person> persons = new HashSet<>();
 
     public Hobby(String name, String wikiLink, String category, String type) {
         this.name = name;

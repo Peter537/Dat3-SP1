@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -27,21 +28,21 @@ public class Person {
     private String email;
     private int age;
 
-    @Column(name = "home_phone_number")
+    @Column(name = "home_phone_number", length = 8)
     private String homePhoneNumber;
 
-    @Column(name = "work_phone_number")
+    @Column(name = "work_phone_number", length = 8)
     private String workPhoneNumber;
 
-    @Column(name = "mobile_phone_number")
+    @Column(name = "mobile_phone_number", length = 8)
     private String mobilePhoneNumber;
 
     @ManyToMany(mappedBy = "persons", fetch = FetchType.EAGER)
     @ToString.Exclude
-    private List<Hobby> hobbies;
+    private Set<Hobby> hobbies = new HashSet<>();
 
-    //@ManyToOne
-    //private Address address;
+    @ManyToOne
+    private Address address;
 
     public Person(String firstName, String lastName, String email, int age, String homePhoneNumber, String workPhoneNumber, String mobilePhoneNumber) {
         this.firstName = firstName;
