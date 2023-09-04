@@ -1,6 +1,5 @@
 package dat.DAO.boilerplate;
 
-import dat.config.HibernateConfig;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.exception.ConstraintViolationException;
