@@ -27,7 +27,7 @@ public class DaoTest {
     @BeforeEach
     void setUp() {
         // Create EntityManagerFactory
-        emf = HibernateConfig.getEntityManagerFactoryConfig("hobby");
+        emf = HibernateConfig.getEntityManagerFactoryConfig("Hobby");
 
         // Truncate database
         personDAO.setEntityManagerFactory(emf);
@@ -137,7 +137,7 @@ public class DaoTest {
     }
 
     @Test
-    void testGetAllByHobby() { // TODO: DTO with hobbies and count of persons (List<HobbyDTO>)
+    void testGetAllByHobby() {
         // Create new hobby
         Hobby hobby = createTestHobby(1);
         hobbyDAO.save(hobby);
@@ -180,6 +180,21 @@ public class DaoTest {
         // Check hobbies
         assertEquals(3, hobbies.size());
     }
+
+     @Test
+     void getAllHobbiesWithPersonCount() {
+        // TODO: Get all hobbies and the amount of people related to it, and store it in a DTO
+
+         // Create 3 new hobby
+
+        // Create 3 new person
+
+        // Set hobby for 2 persons
+
+        // Get all hobbies with person count from DB
+
+        // Check hobbies
+     }
 
     @Test
     void testGetAllByZip() {
@@ -299,18 +314,18 @@ public class DaoTest {
         personDAO.save(person);
 
         // Create new event
-        Event event = new Event()
-        event.setCreatedBy();
+        Event event = new Event();
+        event.setCreatedBy(person);
         event.setEventDate(LocalDate.now());
         event.setAddress(new Address("TestStreet", new Zip(3300, "Yes", "Yep", "Yup")));
         event.setDescription("TestDescription");
         event.setPrice(100.0);
         event.setHobby(createTestHobby(1));
 
-        Event event = new Event(person, new Hobby(), new Address("Horsebakken 5D"), "Test", 0.0, LocalDate.now());
+        Event event2 = new Event(person, new Hobby(), new Address(), "Test", 0.0, LocalDate.now());
 
         // Create new person
-        Person person = new Person("Jensss", "Jensssen", "bruh@emasil.com", LocalDate.now(), "12345676", "12345618", "12345670");
+        Person person2 = new Person("Jensss", "Jensssen", "bruh@emasil.com", LocalDate.now(), "12345676", "12345618", "12345670");
 
 
         // Add person to event
