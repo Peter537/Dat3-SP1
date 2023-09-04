@@ -141,7 +141,7 @@ public class DaoTest {
     }
 
     @Test
-    void testGetAllByHobby() { // TODO: DTO with hobbies and count of persons (List<HobbyDTO>)
+    void testGetAllByHobby() {
         // Create new hobby
         Hobby hobby = createTestHobby(1);
         hobbyDAO.save(hobby);
@@ -184,6 +184,21 @@ public class DaoTest {
         // Check hobbies
         assertEquals(3, hobbies.size());
     }
+
+     @Test
+     void getAllHobbiesWithPersonCount() {
+        // TODO: Get all hobbies and the amount of people related to it, and store it in a DTO
+
+         // Create 3 new hobby
+
+        // Create 3 new person
+
+        // Set hobby for 2 persons
+
+        // Get all hobbies with person count from DB
+
+        // Check hobbies
+     }
 
     @Test
     void testGetAllByZip() {
@@ -316,11 +331,9 @@ public class DaoTest {
         Event event = new Event(person, hobby,address, "Test", 0.0, LocalDate.now());
 
         // Create new person
-
         // Add person to event
         event.getAttendees().add(person);
         eventDAO.save(event);
-
 
 
         

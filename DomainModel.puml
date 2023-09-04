@@ -31,38 +31,43 @@ package ConnectHobby {
   class Hobby {
      + HobbyID: int
      + Name: String
-     + Description: String
+     + wikiLink: String
+     + Category: HobbyCategory
+     + Type: HobbyType
   }
 
-  enum Category {
+  enum HobbyCategory {
      + CategoryID: int
      + CategoryName: String
   }
 
-  enum Type {
+  enum HobbyType {
      + TypeID: int
      + TypeName: String
   }
 
   class Event {
      + EventID: int
-     + Name: String
-     + DateTime: DateTime
-     + Location: String
-     + RegistrationFee: double
-     + Host: Person
-     + Attendee: Person
+     + name: String
+     + createdBy: Person
+     + attendees: Set<Person>
+     + hobby: Hobby
+     + address : String
+     + description: String
+     + price: double
+     + creationDate: LocalDate
+
   }
 
 
   Person "n" --> "1" Address : lives at >
   Address "n" --> "1" ZipCode : is in >
   Person "1" -- "n" Hobby : has >
-  Hobby "n" --> "1" Category : belongs to >
-  Hobby "n" --> "1" Type : belongs to >
+  Hobby "n" --> "1" HobbyCategory : belongs to >
+  Hobby "n" --> "1" HobbyType : belongs to >
   Person "n" -- "m" Event : attends >
   Person "1" -- "n" Event : hosts >
-  Hobby "1" -- "n" Event : relates >
+  Hobby "1" -- "n" Event : relates to <
 }
 @enduml
 

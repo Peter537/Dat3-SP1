@@ -30,7 +30,10 @@ public class Event {
     private Hobby hobby;
 
     @ManyToOne
-    private Address address;
+    private String address;
+
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "description")
     private String description;
