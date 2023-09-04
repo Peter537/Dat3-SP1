@@ -1,6 +1,6 @@
-package dat.dao;
+package dat.data.dao;
 
-import dat.dao.boilerplate.DAO;
+import dat.data.dao.boilerplate.DAO;
 import dat.model.Person;
 
 public class PersonDAO extends DAO<Person> {

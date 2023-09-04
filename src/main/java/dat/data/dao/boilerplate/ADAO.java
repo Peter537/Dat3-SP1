@@ -1,4 +1,4 @@
-package dat.dao.boilerplate;
+package dat.data.dao.boilerplate;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
