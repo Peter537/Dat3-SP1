@@ -38,6 +38,21 @@ Premium Abonnementer: Mens den grundlæggende platform kan være gratis, kan et 
 
 ## Group Work
 
+Vi startede projektet med at have et kort møde omkring arbejdsstrukturen, det her projekt er ikke særlig stort så det var vigtigt at have klare linjer for ikke at træde hinanden over tærerne.
+Vi udviklede vore business case og fik den skåret ned til en størrelse som passede til projektet, vi har valgt ikke at tage nogle af vores ideer om monetarisering med i projektet og heller ikke bygge en algoritme til at connecte brugere med hinanden.
+Vi lavede en domænemodel og fik feedback fra Jörg om at vi skulle tilføje events til den. Dette passede rigtig godt til vores business case, så det tilføjede vi.
+I større projekter ville vi sætte et GitHub projects projekt op for at holde styr på det hele, men i dette projekt er det lidt overkill. I stedet satte vi vores userstories op som issues i GitHub så vi stadigvæk kunne holde styr på hvad der skulle laves.
+
+Vi blev enige om strukturen for projektet og skrev en del noter til de finere detaljer m.h.t. cascading, directions og hvilke felter der skulle være unikke og hvilke felter der måtte være tomme.
+Da fleste af vores tanker var sat op og alle var med på den aftalte struktur, da begyndte vi at inddele arbejdet: Halvdelen af os skulle opsætte entities og skrive relationerne op, samt at finde ud af hvilke attributter ville være passende. Den anden halvdel stod for at skrive unit tests.
+
+Da entiteterne var sat op, gik vi i gang med at sikre at alle test virkede som de skulle.
+Vi arbejdede igennem i løbet af startdagen og stødte på flere problemer hen ad vejen; hovedsageligt med enums og datakonvertering på databasen.
+Postgres gad ikke lade os skrive en custom-constraint check hvilket gav os flere errors. Vi endte med at bestemme os for at lave egen data, så vi ikke spilder tid på at løse noget relativt irrelevant.
+
+Testene blev udarbejdet flittigt og projektet nåede minimum 90% code-coverage, og dækkede næsten alle vores DAO metoder.
+
+
 
 ## Technical Requirements
 

@@ -68,6 +68,40 @@ public class Person {
     @PrePersist
     private void prePersist() {
         this.creationDate = LocalDate.now();
+        if (!validatePhoneNumber(this.mobilePhoneNumber)) {
+            throw new IllegalArgumentException("Invalid phone number");
+        }
+
+        if (!validatePhoneNumber(this.homePhoneNumber)) {
+            throw new IllegalArgumentException("Invalid phone number");
+        }
+
+        if (!validatePhoneNumber(this.workPhoneNumber)) {
+            throw new IllegalArgumentException("Invalid phone number");
+        }
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        if (!validatePhoneNumber(this.mobilePhoneNumber)) {
+            throw new IllegalArgumentException("Invalid phone number");
+        }
+
+        if (!validatePhoneNumber(this.homePhoneNumber)) {
+            throw new IllegalArgumentException("Invalid phone number");
+        }
+
+        if (!validatePhoneNumber(this.workPhoneNumber)) {
+            throw new IllegalArgumentException("Invalid phone number");
+        }
+    }
+
+    private boolean validatePhoneNumber(String phoneNumber) {
+        if (phoneNumber == null) {
+            return true;
+        }
+
+        return phoneNumber.matches("^[0-9]{8}$");
     }
 
     public void addHobby(Hobby hobby, Integer rating) {
