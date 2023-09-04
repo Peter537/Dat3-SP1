@@ -10,6 +10,7 @@ public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @ManyToOne
@@ -31,8 +32,10 @@ public class Event {
     private Double price;
 
     @Temporal(TemporalType.DATE)
+    @Column(name = "creation_date")
     private LocalDate creationDate;
 
     @Temporal(TemporalType.DATE)
+    @Column(name = "event_date")
     private LocalDate eventDate;
 }
