@@ -18,7 +18,9 @@ public class DaoTest {
     EntityManagerFactory emf;
     DAO<Person> personDAO = new DAO<>();
     DAO<Hobby> hobbyDAO = new DAO<>();
+    DAO<Address> addressDAO = new DAO<>();
     
+
 
     @BeforeEach
     void setUp() {
@@ -32,7 +34,6 @@ public class DaoTest {
         hobbyDAO.setEntityManagerFactory(emf);
         hobbyDAO.truncate(Hobby.class);
 
-        DAO<Address> addressDAO = new DAO<>();
         addressDAO.setEntityManagerFactory(emf);
         addressDAO.truncate(Address.class);
 
