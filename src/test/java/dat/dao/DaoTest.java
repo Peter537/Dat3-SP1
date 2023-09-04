@@ -359,6 +359,7 @@ public class DaoTest {
         eventDAO.save(event);
 // sout the the attendees
         System.out.println(event.getAttendees());
+        assertEquals(1, event.getAttendees().size());
     }
 
     @Test
