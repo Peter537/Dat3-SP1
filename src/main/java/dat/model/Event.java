@@ -29,7 +29,7 @@ public class Event {
     @ManyToOne
     private Hobby hobby;
 
-    @ManyToOne
+    @Column(name = "address")
     private String address;
 
     @Column(name = "name")
@@ -53,7 +53,7 @@ public class Event {
     @Column(name = "last_updated")
     private LocalDate lastUpdated;
 
-    public Event(Person createdBy, Hobby hobby, Address address, String description, Double price, LocalDate eventDate) {
+    public Event(Person createdBy, Hobby hobby, String address, String description, Double price, LocalDate eventDate) {
         this.createdBy = createdBy;
         this.hobby = hobby;
         this.address = address;
