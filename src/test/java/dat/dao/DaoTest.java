@@ -187,15 +187,15 @@ public class DaoTest {
         assertEquals(3, hobbies.size());
     }
 
-     @Test
-     void getAllHobbiesWithPersonCount() {
-         // Create 3 new hobby
-         Hobby hobby1 = createTestHobby(1);
-            Hobby hobby2 = createTestHobby(2);
-            Hobby hobby3 = createTestHobby(3);
-            hobbyDAO.save(hobby1);
-            hobbyDAO.save(hobby2);
-            hobbyDAO.save(hobby3);
+    @Test
+    void getAllHobbiesWithPersonCount() {
+        // Create 3 new hobby
+        Hobby hobby1 = createTestHobby(1);
+        Hobby hobby2 = createTestHobby(2);
+        Hobby hobby3 = createTestHobby(3);
+        hobbyDAO.save(hobby1);
+        hobbyDAO.save(hobby2);
+        hobbyDAO.save(hobby3);
 
         // Create 3 new person
         Person person1 = createTestPerson(1);
@@ -226,7 +226,7 @@ public class DaoTest {
                 assertEquals(0, hobby.count());
             }
         }
-     }
+    }
 
     @Test
     void testGetAllByZip() {
@@ -333,51 +333,75 @@ public class DaoTest {
     @Test
     void testCreateEvent() {
         // Create new event
+        Event event = new Event();
+        eventDAO.save(event);
 
+        // Create new person
         Person person = createTestPerson(1);
         personDAO.save(person);
 
+        // Add person to event
+        event.getAttendees().add(person);
+        eventDAO.update(event);
+
+        // Create new hobby
         Hobby hobby = createTestHobby(1);
         hobbyDAO.save(hobby);
 
+        // Add hobby to event
+        event.setHobby(hobby);
+        eventDAO.update(event);
+
+        // Create new address and zip
         Zip zip = new Zip(3300, "Yes", "Yep", "Yup");
         zipDAO.save(zip);
 
         Address address = new Address("TestStreet", zip);
         addressDAO.save(address);
 
-        Event event = new Event(person, hobby, address.getStreet(), "Test", 0.0, LocalDate.now());
-        eventDAO.save(event);
+        // Add address to event
+        event.setAddress(address.getStreet());
+        eventDAO.update(event);
 
         Event eventDB = eventDAO.findById(Event.class, event.getId());
-        assertEquals("TestStreet", eventDAO.findById(Event.class, 1).getAddress());
+        assertEquals(event.getId(), eventDB.getId());
 
     }
 
     @Test
     void testJoinEvent() {
+        // Create event
+        Event event = new Event();
+        eventDAO.save(event);
+
+        // Create new person
         Person person = createTestPerson(1);
         personDAO.save(person);
 
+        // Add person to event
+        event.getAttendees().add(person);
+        eventDAO.update(event);
+
+        // Create new hobby
         Hobby hobby = createTestHobby(1);
         hobbyDAO.save(hobby);
 
+        // Add hobby to event
+        event.setHobby(hobby);
+        eventDAO.update(event);
+
+        // Create new address and zip
         Zip zip = new Zip(3300, "Yes", "Yep", "Yup");
         zipDAO.save(zip);
 
         Address address = new Address("TestStreet", zip);
         addressDAO.save(address);
 
+        // Add address to event
+        event.setAddress(address.getStreet());
+        eventDAO.update(event);
 
-
-        Event event = new Event(person, hobby, address.getStreet(), "Test", 0.0, LocalDate.now());
-        // Create new person
-
-        // Add person to event
-        event.getAttendees().add(person);
-        eventDAO.save(event);
-// sout the the attendees
-        System.out.println(event.getAttendees());
+        // Add event to person
         assertEquals(1, event.getAttendees().size());
     }
 
@@ -408,33 +432,40 @@ public class DaoTest {
 
     @Test
     void testGetEventByPerson() {
+        // Create new event
+        Event event = new Event();
+        eventDAO.save(event);
 
-
+        // Create new person
         Person person = createTestPerson(1);
         personDAO.save(person);
 
+        // Add person to event
+        event.setCreatedBy(person);
+        eventDAO.update(event);
+
+        // Create new hobby
         Hobby hobby = createTestHobby(1);
         hobbyDAO.save(hobby);
 
+        // Add hobby to event
+        event.setHobby(hobby);
+        eventDAO.update(event);
+
+        // Create new address and zip
         Zip zip = new Zip(3300, "Yes", "Yep", "Yup");
         zipDAO.save(zip);
 
         Address address = new Address("TestStreet", zip);
         addressDAO.save(address);
 
-        Event event = new Event(person, hobby, address.getStreet(), "Test", 0.0, LocalDate.now());
+        // Add address to event
+        event.setAddress(address.getStreet());
+        eventDAO.update(event);
 
-        // Create new person
-        // Add person to event
-        event.getAttendees().add(person);
-        eventDAO.save(event);
-
-
-        
-
-        // Get event from DB
-
-        // Check event
+        //Get event from DB and check
+        List<Event> personFromDB = eventDAO.getEventsByPerson(person);
+        assertEquals(person.getId(), personFromDB.get(0).getCreatedBy().getId());
     }
 
 

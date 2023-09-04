@@ -31,6 +31,9 @@ Premium Abonnementer: Mens den grundlæggende platform kan være gratis, kan et 
 
 
 ## Domain Model
+Vi har lavet vores domænemodel i PlantUML, som kan ses i DomainModel.puml filen eller herunder:
+![](DomainModel.png)
+
 
 
 ## EER-Diagram
@@ -50,10 +53,17 @@ Da entiteterne var sat op, gik vi i gang med at sikre at alle test virkede som d
 Vi arbejdede igennem i løbet af startdagen og stødte på flere problemer hen ad vejen; hovedsageligt med enums og datakonvertering på databasen.
 Postgres gad ikke lade os skrive en custom-constraint check hvilket gav os flere errors. Vi endte med at bestemme os for at lave egen data, så vi ikke spilder tid på at løse noget relativt irrelevant.
 Vi benyttede ikke så meget branching i dette projekt, hvilket gav nogle problemer når mere end en person arbejde på det samme. Det meste af tiden var vi i forskellige dele af koden, så det var ikke det store problem. Vi har generelt ret svært ved at bruge branches i gruppen, og det er en del vi gerne ville være bedre til. Vi er rigtig gode til at kommunikere med hinanden undervejs, så vi ikke har for mange merge conflicts.
+Vi endte med at have alle vores tests i en klasse, hvilket ikke var særlig smart da det gjorde det svært at finde rundt i. Vi burde have lavet en testklasse for hver entity i stedet.
+
+Alt i alt gik vores projekt godt, vi arbejdede effektivt og fik kommunikeret godt med hinanden undervejs. Det var nogle struktur-ting som kunne have været bedre, men vi er meget vandt til at arbejde sammen så det gik godt alligevel.
 
 
-Testene blev udarbejdet flittigt og projektet nåede minimum 90% code-coverage, og dækkede næsten alle vores DAO metoder.
+## User Stories
+Ud over de givne user stories, har vi lavet følgende:
 
+- US-10: As a user, I want to be able to create an event, so that I can host events for other users.
+
+- US-11: As a user, I want to be able to join an event, so that I can participate in events hosted by other users.
 
 
 ## Technical Requirements
