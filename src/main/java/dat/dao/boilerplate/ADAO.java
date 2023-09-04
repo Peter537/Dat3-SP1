@@ -86,14 +86,19 @@ abstract class ADAO<T> implements IDAO<T> { // TODO: Add tcf (try, catch, final)
 
             entityManager.getTransaction().commit();
 
-            // Restart sequence
-            entityManager.getTransaction().begin();
+            // Restart sequence if it exists
+            try {
+                entityManager.getTransaction().begin();
 
-            sql = "ALTER SEQUENCE " + tableName + "_id_seq RESTART WITH 1";
+                sql = "ALTER SEQUENCE " + tableName + "_id_seq RESTART WITH 1";
 
-            entityManager.createNativeQuery(sql).executeUpdate();
+                entityManager.createNativeQuery(sql).executeUpdate();
 
-            entityManager.getTransaction().commit();
+                entityManager.getTransaction().commit();
+            }
+            catch (Exception e) {
+                System.out.println("Sequence does not exist: " + tableName + "_id_seq");
+            }
         } catch (ConstraintViolationException e) {
             System.out.println("Constraint violation: " + e.getMessage());
         }
