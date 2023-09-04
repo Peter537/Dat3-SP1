@@ -21,7 +21,7 @@ public class DaoTest {
     PersonDAO personDAO = new PersonDAO();
     HobbyDAO hobbyDAO = new HobbyDAO();
     DAO<Address> addressDAO = new DAO<>();
-    
+    DAO<Zip> zipDAO = new DAO<>();
 
 
     @BeforeEach
@@ -39,6 +39,8 @@ public class DaoTest {
         addressDAO.setEntityManagerFactory(emf);
         addressDAO.truncate(Address.class);
 
+        zipDAO.setEntityManagerFactory(emf);
+        zipDAO.truncate(Zip.class);
         // Insert test data
 
     }
@@ -190,16 +192,18 @@ public class DaoTest {
         personDAO.save(person3);
 
         // Set zip for 2 persons
-        Zip zip = new Zip(3300, null, null, null);
+        Zip zip = new Zip(3300, "Yes", "Yep", "Yup");
+        System.out.println(zipDAO.save(zip));
         Address address = new Address("TestStreet", zip);
-        addressDAO.save(address);
+        System.out.println(addressDAO.save(address));
         person1.setAddress(address);
         persen2.setAddress(address);
         personDAO.update(person1);
         personDAO.update(persen2);
+        System.out.println(person1);
 
         // Get all persons with zip from DB
-        List<Person> persons = personDAO.getAllByZip("3330");
+        List<Person> persons = personDAO.getAllByZip(3330);
 
         // Check persons
         assertEquals(2, persons.size());

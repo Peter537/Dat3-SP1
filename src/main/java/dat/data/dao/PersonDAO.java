@@ -28,10 +28,10 @@ public class PersonDAO extends DAO<Person> {
         }
     }
 
-    public List<Person> getAllByZip(String zip) {
+    public List<Person> getAllByZip(Integer zip) {
         try (EntityManager entityManager = super.getEntityManagerFactory().createEntityManager()) {
             entityManager.getTransaction().begin();
-            List<Person> persons = entityManager.createQuery("SELECT p FROM Person p WHERE p.address.zip.zip = :zip", Person.class)
+            List<Person> persons = entityManager.createQuery("SELECT p FROM Person p LEFT JOIN p.address address WHERE address IS NOT NULL OR address.zip.zip = :zip", Person.class)
                     .setParameter("zip", zip)
                     .getResultList();
             entityManager.getTransaction().commit();
@@ -59,7 +59,7 @@ public class PersonDAO extends DAO<Person> {
     public List<Person> getAllByHobby(Hobby hobby) {
         try (EntityManager entityManager = super.getEntityManagerFactory().createEntityManager()) {
             entityManager.getTransaction().begin();
-            List<Person> persons = entityManager.createQuery("SELECT p FROM Person p WHERE :hobby MEMBER OF p.hobbies", Person.class)
+            List<Person> persons = entityManager.createQuery("SELECT DISTINCT p FROM Person p JOIN p.hobbies ph WHERE ph.hobby = :hobby", Person.class)
                     .setParameter("hobby", hobby)
                     .getResultList();
             entityManager.getTransaction().commit();
