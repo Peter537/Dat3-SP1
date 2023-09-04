@@ -284,10 +284,26 @@ public class DaoTest {
     void testCreateEvent() {
         // Create new event
 
+        Person person = createTestPerson(1);
+        personDAO.save(person);
+
+        Hobby hobby = createTestHobby(1);
+        hobbyDAO.save(hobby);
+
+        Zip zip = new Zip(3300, "Yes", "Yep", "Yup");
+        zipDAO.save(zip);
+
+        Address address = new Address("TestStreet", zip);
+        addressDAO.save(address);
+
+
+
+        Event event = new Event(person, hobby, address.getStreet(), "Test", 0.0, LocalDate.now());
         // Create new person
 
         // Add person to event
-
+        event.getAttendees().add(person);
+        eventDAO.save(event);
         // Create new hobby
 
         // Add hobby to event
@@ -295,6 +311,32 @@ public class DaoTest {
         // Get event from DB
 
         // Check event
+    }
+
+    @Test
+    void testJoinEvent() {
+        Person person = createTestPerson(1);
+        personDAO.save(person);
+
+        Hobby hobby = createTestHobby(1);
+        hobbyDAO.save(hobby);
+
+        Zip zip = new Zip(3300, "Yes", "Yep", "Yup");
+        zipDAO.save(zip);
+
+        Address address = new Address("TestStreet", zip);
+        addressDAO.save(address);
+
+
+
+        Event event = new Event(person, hobby, address.getStreet(), "Test", 0.0, LocalDate.now());
+        // Create new person
+
+        // Add person to event
+        event.getAttendees().add(person);
+        eventDAO.save(event);
+// sout the the attendees
+        System.out.println(event.getAttendees());
     }
 
     @Test
