@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,6 +53,9 @@ public class DaoTest {
 
         // Check fields
         assertEquals(person.getFirstName(), personFromDB.getFirstName());
+        assertEquals(person.getLastName(), personFromDB.getLastName());
+        assertEquals(person.getEmail(), personFromDB.getEmail());
+        assertEquals(person.getBirthDate(), personFromDB.getBirthDate());
     }
 
     @Test
@@ -130,7 +134,7 @@ public class DaoTest {
     }
 
     @Test
-    void testGetAllByHobby() {
+    void testGetAllByHobby() { // TODO: DTO with hobbies and count of persons (List<HobbyDTO>)
         // Create new hobby
 
         // Create 3 new person
@@ -145,12 +149,17 @@ public class DaoTest {
     }
 
     @Test
-    void testGetAllHobbies() { // TODO: DTO with hobbies and count of persons (List<HobbyDTO>)
+    void testGetAllHobbies() {
         // Create 3 new hobby
+        Hobby hobby1 = createTestHobby(1);
+        Hobby hobby2 = createTestHobby(2);
+        Hobby hobby3 = createTestHobby(3);
 
         // Get all hobbies from DB
+        List<Hobby> hobbies = hobbyDAO.getAll(Hobby.class);
 
         // Check hobbies
+        assertEquals(3, hobbies.size());
 
         // Check count
     }
