@@ -1,11 +1,15 @@
 package dat.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
+@Setter
+@Getter
 public class Event {
 
     @Id
@@ -42,6 +46,15 @@ public class Event {
     @Temporal(TemporalType.DATE)
     @Column(name = "last_updated")
     private LocalDate lastUpdated;
+
+    public Event(Person createdBy, Hobby hobby, Address address, String description, Double price, LocalDate eventDate) {
+        this.createdBy = createdBy;
+        this.hobby = hobby;
+        this.address = address;
+        this.description = description;
+        this.price = price;
+        this.eventDate = eventDate;
+    }
 
     @PrePersist
     public void prePersist() {
