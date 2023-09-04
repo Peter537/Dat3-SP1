@@ -46,9 +46,11 @@ I større projekter ville vi sætte et GitHub projects projekt op for at holde s
 Vi blev enige om strukturen for projektet og skrev en del noter til de finere detaljer m.h.t. cascading, directions og hvilke felter der skulle være unikke og hvilke felter der måtte være tomme.
 Da fleste af vores tanker var sat op og alle var med på den aftalte struktur, da begyndte vi at inddele arbejdet: Halvdelen af os skulle opsætte entities og skrive relationerne op, samt at finde ud af hvilke attributter ville være passende. Den anden halvdel stod for at skrive unit tests.
 
-Da entiteterne var sat op, gik vi i gang med at sikre at alle test virkede som de skulle.
+Da entiteterne var sat op, gik vi i gang med at sikre at alle test virkede som de skulle og satte lidt flere tests op.
 Vi arbejdede igennem i løbet af startdagen og stødte på flere problemer hen ad vejen; hovedsageligt med enums og datakonvertering på databasen.
 Postgres gad ikke lade os skrive en custom-constraint check hvilket gav os flere errors. Vi endte med at bestemme os for at lave egen data, så vi ikke spilder tid på at løse noget relativt irrelevant.
+Vi benyttede ikke så meget branching i dette projekt, hvilket gav nogle problemer når mere end en person arbejde på det samme. Det meste af tiden var vi i forskellige dele af koden, så det var ikke det store problem. Vi har generelt ret svært ved at bruge branches i gruppen, og det er en del vi gerne ville være bedre til. Vi er rigtig gode til at kommunikere med hinanden undervejs, så vi ikke har for mange merge conflicts.
+
 
 Testene blev udarbejdet flittigt og projektet nåede minimum 90% code-coverage, og dækkede næsten alle vores DAO metoder.
 

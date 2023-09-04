@@ -273,10 +273,16 @@ public class DaoTest {
         Person person2 = createTestPerson(2);
 
         // Set email for 2 persons
+        person1.setEmail("a@a.dk");
+        person2.setEmail("b@b.dk");
+        personDAO.save(person1);
+        personDAO.save(person2);
 
         // Get person with email from DB
+        Person person = personDAO.getPersonByEmail("a@a.dk");
 
         // Check person
+        assertEquals(person1.getId(), person.getId());
     }
 
     @Test

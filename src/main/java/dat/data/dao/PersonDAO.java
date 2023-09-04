@@ -81,4 +81,18 @@ public class PersonDAO extends DAO<Person> {
             return null;
         }
     }
+
+    public Person getPersonByEmail(String mail) {
+        try (EntityManager entityManager = super.getEntityManagerFactory().createEntityManager()) {
+            entityManager.getTransaction().begin();
+            Person person = entityManager.createQuery("SELECT p FROM Person p WHERE p.email = :mail", Person.class)
+                    .setParameter("mail", mail)
+                    .getSingleResult();
+            entityManager.getTransaction().commit();
+            return person;
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        }
+    }
 }
