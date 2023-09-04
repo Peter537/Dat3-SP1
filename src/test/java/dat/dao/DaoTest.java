@@ -88,32 +88,31 @@ public class DaoTest {
 
     @Test
     void testGetHobby() {
-        // Get hobby from DB
-        Hobby hobbyFromDB = hobbyDAO.findById(Hobby.class, 1);
-
-        // Check fields
-    }
-
-    @Test
-    void testUpdateHobby() {
         // Create new hobby
-
-        // Update hobby
-
+        Hobby hobby = createTestHobby();
+        hobbyDAO.save(hobby);
         // Get hobby from DB
+        Hobby hobbyFromDB = phobbyDAO.findById(Hobby.class, hobby.getId());
 
         // Check fields
+        assertEquals(hobby.getName(), hobbyFromDB.getName());
+        assertEquals(hobby.getWikiLink(), hobbyFromDB.getWikiLink());
+        assertEquals(hobby.getType(), hobbyFromDB.getType());
+        assertEquals(hobby.getCategory(), hobbyFromDB.getCategory());
     }
+
 
     @Test
     void testDeleteHobby() {
         // Create new hobby
+        Hobby hobby = createTestHobby();
+        hobbyDAO.save(hobby);
 
         // Delete hobby
-
-        // Get hobby from DB
+        hobbyDAO.delete(hobby);
 
         // Check fields
+        assertEquals(0, hobbyDAO.getAll(Hobby.class).size());
     }
 
     @Test
