@@ -24,5 +24,4 @@ public class Zip {
     private String municipality_name;
 
 
-
 }

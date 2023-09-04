@@ -24,7 +24,7 @@ public class Address {
     @ManyToOne(cascade = CascadeType.MERGE)
     private Zip zip;
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "address", cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<Person> person = new HashSet<>();
 
 
