@@ -21,7 +21,7 @@ public class Address {
     private String street;
 
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Zip zip;
 
     @OneToMany(mappedBy = "address", cascade = CascadeType.MERGE, orphanRemoval = true)
