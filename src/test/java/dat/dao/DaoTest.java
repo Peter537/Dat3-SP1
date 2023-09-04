@@ -230,9 +230,19 @@ public class DaoTest {
 
     @Test
     void testGetAllZip() {
+        // Create 3 new zip
+        Zip zip1 = new Zip(3300, "Yes", "Yep", "Yup");
+        Zip zip2 = new Zip(3301, "Yes", "Yep", "Yup");
+        Zip zip3 = new Zip(3302, "Yes", "Yep", "Yup");
+        zipDAO.save(zip1);
+        zipDAO.save(zip2);
+        zipDAO.save(zip3);
+
         // Get all zip from DB
+        List<Zip> zips = zipDAO.getAll(Zip.class);
 
         // Check List size
+        assertEquals(3, zips.size());
     }
 
     @Test
@@ -263,21 +273,33 @@ public class DaoTest {
         Person person2 = createTestPerson(2);
 
         // Set email for 2 persons
+        person1.setEmail("a@a.dk");
+        person2.setEmail("b@b.dk");
+        personDAO.save(person1);
+        personDAO.save(person2);
 
         // Get person with email from DB
+        Person person = personDAO.getPersonByEmail("a@a.dk");
 
         // Check person
+        assertEquals(person1.getId(), person.getId());
     }
 
     @Test
     void testGetHobbiesByType() {
         // Create 3 new hobby
-
-        // Set type for 2 hobbies
+        Hobby hobby1 = createTestHobby(1);
+        Hobby hobby2 = createTestHobby(2);
+        Hobby hobby3 = createTestHobby(3);
+        hobbyDAO.save(hobby1);
+        hobbyDAO.save(hobby2);
+        hobbyDAO.save(hobby3);
 
         // Get hobbies with type from DB
+        List<Hobby> hobbies = hobbyDAO.getHobbiesByType(HobbyType.INDOOR);
 
         // Check hobbies
+        assertEquals(3, hobbies.size());
     }
 
     @Test
@@ -367,8 +389,6 @@ public class DaoTest {
 
         Address address = new Address("TestStreet", zip);
         addressDAO.save(address);
-
-
 
         Event event = new Event(person, hobby, address.getStreet(), "Test", 0.0, LocalDate.now());
 
