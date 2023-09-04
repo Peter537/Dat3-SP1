@@ -26,12 +26,12 @@ package ConnectHobby {
      + Description: String
   }
 
-  class Category {
+  enum Category {
      + CategoryID: int
      + CategoryName: String
   }
 
-  class Type {
+  enum Type {
      + TypeID: int
      + TypeName: String
   }
