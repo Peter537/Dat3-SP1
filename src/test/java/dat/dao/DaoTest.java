@@ -1,6 +1,7 @@
 package dat.dao;
 
 import dat.config.HibernateConfig;
+import dat.data.dao.HobbyDAO;
 import dat.data.dao.PersonDAO;
 import dat.data.dao.boilerplate.DAO;
 import dat.data.dto.PhoneNumbersDTO;
@@ -18,7 +19,7 @@ public class DaoTest {
 
     EntityManagerFactory emf;
     PersonDAO personDAO = new PersonDAO();
-    DAO<Hobby> hobbyDAO = new DAO<>();
+    HobbyDAO hobbyDAO = new HobbyDAO();
     DAO<Address> addressDAO = new DAO<>();
     
 
