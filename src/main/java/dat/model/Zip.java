@@ -33,4 +33,11 @@ public class Zip {
     @OneToMany(mappedBy = "zip")
     @ToString.Exclude
     private Set<Address> address = new HashSet<>();
+
+    public Zip(Integer zip, String cityName, String regionName, String municipalityName) {
+        this.zip = zip;
+        this.cityName = cityName;
+        this.regionName = regionName;
+        this.municipalityName = municipalityName;
+    }
 }

@@ -27,7 +27,7 @@ public class DaoTest {
     @BeforeEach
     void setUp() {
         // Create EntityManagerFactory
-        emf = HibernateConfig.getEntityManagerFactoryConfig("Hobby");
+        emf = HibernateConfig.getEntityManagerFactoryConfig("hobby");
 
         // Truncate database
         personDAO.setEntityManagerFactory(emf);
@@ -138,16 +138,21 @@ public class DaoTest {
     void testGetAllByHobby() { // TODO: DTO with hobbies and count of persons (List<HobbyDTO>)
         // Create new hobby
         Hobby hobby = createTestHobby(1);
+        hobbyDAO.save(hobby);
 
         // Create 3 new person
         Person person1 = createTestPerson(1);
         Person person2 = createTestPerson(2);
         Person person3 = createTestPerson(3);
+        personDAO.save(person1);
+        personDAO.save(person2);
+        personDAO.save(person3);
 
         // Set hobby for 2 persons
-        person1.addHobby(hobby);
-        person2.addHobby(hobby);
-
+        person1.addHobby(hobby, 5);
+        person2.addHobby(hobby, 3);
+        personDAO.update(person1);
+        personDAO.update(person2);
 
         // Get all persons with hobby from DB
         List<Person> persons = personDAO.getAllByHobby(hobby);
@@ -180,10 +185,18 @@ public class DaoTest {
         Person person1 = createTestPerson(1);
         Person persen2 = createTestPerson(2);
         Person person3 = createTestPerson(3);
+        personDAO.save(person1);
+        personDAO.save(persen2);
+        personDAO.save(person3);
 
         // Set zip for 2 persons
-        person1.getAddress().setZip("3330");
-        person2.getAddress().setZip("3330");
+        Zip zip = new Zip(3300, null, null, null);
+        Address address = new Address("TestStreet", zip);
+        addressDAO.save(address);
+        person1.setAddress(address);
+        persen2.setAddress(address);
+        personDAO.update(person1);
+        personDAO.update(persen2);
 
         // Get all persons with zip from DB
         List<Person> persons = personDAO.getAllByZip("3330");
@@ -204,10 +217,14 @@ public class DaoTest {
         // Create 2 new person
         Person person1 = createTestPerson(1);
         Person person2 = createTestPerson(2);
+        personDAO.save(person1);
+        personDAO.save(person2);
 
         // Set mobile for 2 persons
         person1.setMobilePhoneNumber("12345678");
         person2.setMobilePhoneNumber("12345679");
+        personDAO.update(person1);
+        personDAO.update(person2);
 
         // Get person with mobile from DB
         Person person = personDAO.getAllByMobile("12345678");
