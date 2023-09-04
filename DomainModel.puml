@@ -58,6 +58,7 @@ package ConnectHobby {
   Hobby "n" --> "1" Category : belongs to >
   Hobby "n" --> "1" Type : has >
   User "n" -- "m" Event : attends >
+  User "1" -- "n" Event : hosts >
   Hobby "1" -- "n" Event : relates >
   Event "1" -- "n" Feedback : receives >
   User "1" -- "n" Feedback : writes >
