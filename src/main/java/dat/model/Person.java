@@ -19,7 +19,8 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -27,11 +28,11 @@ public class Person {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(unique = true)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
+    @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
     @Column(name = "home_phone_number", length = 8)
@@ -40,7 +41,7 @@ public class Person {
     @Column(name = "work_phone_number", length = 8)
     private String workPhoneNumber;
 
-    @Column(name = "mobile_phone_number", length = 8, unique = true)
+    @Column(name = "mobile_phone_number", length = 8, nullable = false, unique = true)
     private String mobilePhoneNumber;
 
     @ManyToMany(mappedBy = "persons", fetch = FetchType.EAGER)

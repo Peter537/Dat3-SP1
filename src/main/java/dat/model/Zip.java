@@ -19,7 +19,7 @@ public class Zip {
 
     @Id
     @Column(name = "zip")
-    private int zip;
+    private Integer zip;
 
     @Column(name = "city_name")
     private String cityName;

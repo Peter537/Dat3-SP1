@@ -15,13 +15,11 @@ import java.util.Set;
 public class Address {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Column(name = "street")
+    @Column(name = "street", nullable = false)
     private String street;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @Column(name = "zip", nullable = false)
     private Zip zip;
 
     @OneToMany(mappedBy = "address", cascade = CascadeType.MERGE, orphanRemoval = true)

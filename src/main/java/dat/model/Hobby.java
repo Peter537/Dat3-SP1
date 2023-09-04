@@ -15,18 +15,18 @@ import java.util.Set;
 public class Hobby {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "wiki_link")
+    @Column(name = "wikiLink", nullable = false)
     private String wikiLink;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "category", nullable = false)
     private HobbyCategory category;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
     private HobbyType type;
 
     @ManyToMany(mappedBy = "hobbies", fetch = FetchType.EAGER)
