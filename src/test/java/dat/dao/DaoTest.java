@@ -318,21 +318,12 @@ public class DaoTest {
         Address address = new Address("TestStreet", zip);
         addressDAO.save(address);
 
-
-
         Event event = new Event(person, hobby, address.getStreet(), "Test", 0.0, LocalDate.now());
-        // Create new person
-
-        // Add person to event
-        event.getAttendees().add(person);
         eventDAO.save(event);
-        // Create new hobby
 
-        // Add hobby to event
+        Event eventDB = eventDAO.findById(Event.class, event.getId());
+        assertEquals("TestStreet", eventDAO.findById(Event.class, 1).getAddress());
 
-        // Get event from DB
-
-        // Check event
     }
 
     @Test
