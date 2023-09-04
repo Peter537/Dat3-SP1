@@ -1,5 +1,9 @@
 package dat.dao;
 
+import dat.dao.boilerplate.DAO;
+import dat.model.Address;
+import dat.model.Hobby;
+import dat.model.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +12,14 @@ public class DaoTest {
     @BeforeEach
     void setUp() {
         // Truncate database
+        DAO<Person> personDAO = new DAO<>();
+        personDAO.truncate(Person.class);
+
+        DAO<Hobby> hobbyDAO = new DAO<>();
+        hobbyDAO.truncate(Hobby.class);
+
+        DAO<Address> addressDAO = new DAO<>();
+        addressDAO.truncate(Address.class);
 
         // Insert test data
 
