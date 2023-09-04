@@ -18,7 +18,7 @@ public class Zip {
     private int zip;
     @Column(name = "city_name")
     private String city_name;
-    @Column(name = "state_name")
+    @Column(name = "region_name")
     private String region_name;
     @Column(name = "municipality_name")
     private String municipality_name;
