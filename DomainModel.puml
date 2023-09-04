@@ -1,0 +1,67 @@
+@startuml
+package ConnectHobby {
+  class User {
+     + UserID: int
+     + Name: String
+     + Email: String
+     + Password: String
+     + PhoneNumber: String
+  }
+
+  class Address {
+     + AddressID: int
+     + StreetName: String
+     + HouseNumber: String
+  }
+
+  class ZipCode {
+     + ZipCodeID: int
+     + Code: String
+     + CityName: String
+  }
+
+  class Hobby {
+     + HobbyID: int
+     + Name: String
+     + Description: String
+  }
+
+  enum Category {
+     + CategoryID: int
+     + CategoryName: String
+  }
+
+  enum Type {
+     + TypeID: int
+     + TypeName: String
+  }
+
+  class Event {
+     + EventID: int
+     + Name: String
+     + DateTime: DateTime
+     + Location: String
+     + RegistrationFee: double
+     + Host: User
+  }
+
+  class Feedback {
+     + FeedbackID: int
+     + Content: String
+     + Rating: int
+     + Author: User
+  }
+
+  User "n" --> "1" Address : lives at >
+  Address "n" --> "1" ZipCode : is in >
+  User "1" -- "n" Hobby : has >
+  Hobby "n" --> "1" Category : belongs to >
+  Hobby "n" --> "1" Type : belongs to >
+  User "n" -- "m" Event : attends >
+  User "1" -- "n" Event : hosts >
+  Hobby "1" -- "n" Event : relates >
+  Event "1" -- "n" Feedback : receives >
+  User "1" -- "n" Feedback : writes >
+}
+@enduml
+
