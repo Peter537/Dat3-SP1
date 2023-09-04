@@ -230,9 +230,19 @@ public class DaoTest {
 
     @Test
     void testGetAllZip() {
+        // Create 3 new zip
+        Zip zip1 = new Zip(3300, "Yes", "Yep", "Yup");
+        Zip zip2 = new Zip(3301, "Yes", "Yep", "Yup");
+        Zip zip3 = new Zip(3302, "Yes", "Yep", "Yup");
+        zipDAO.save(zip1);
+        zipDAO.save(zip2);
+        zipDAO.save(zip3);
+
         // Get all zip from DB
+        List<Zip> zips = zipDAO.getAll(Zip.class);
 
         // Check List size
+        assertEquals(3, zips.size());
     }
 
     @Test
@@ -328,7 +338,7 @@ public class DaoTest {
 
 
 
-        Event event = new Event(person, hobby,address, "Test", 0.0, LocalDate.now());
+        Event event = new Event(person, hobby, address.toString(), "Test", 0.0, LocalDate.now());
 
         // Create new person
         // Add person to event
