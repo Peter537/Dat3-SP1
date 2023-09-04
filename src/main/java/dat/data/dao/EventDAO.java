@@ -3,6 +3,7 @@ package dat.data.dao;
 import dat.data.dao.boilerplate.DAO;
 import dat.model.Event;
 import dat.model.Hobby;
+import dat.model.Person;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
@@ -30,6 +31,14 @@ public class EventDAO extends DAO<Event> {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             return null;
+        }
+    }
+
+    public List<Event> getEventsByPerson(Person person) {
+        try(EntityManager em = super.getEntityManagerFactory().createEntityManager()){
+            return em.createQuery("SELECT e FROM Event e WHERE e.createdBy = :person", Event.class)
+                    .setParameter("person", person).getResultList();
+
         }
     }
 }
