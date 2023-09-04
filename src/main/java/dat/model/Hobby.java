@@ -24,11 +24,15 @@ public class Hobby {
     private String wikiLink;
 
     @Enumerated(EnumType.STRING)
+    //    @Column(name = "category", nullable = false, columnDefinition = "VARCHAR(60) CHECK (category IN ('Generel', 'Educational hobbies', 'Samler hobbyer', 'Konkurrence', 'Observation'))")
+//    @Column(columnDefinition = "VARCHAR(60) CHECK (category IN ('Generel', 'Educational hobbies', 'Samler hobbyer', 'Konkurrence', 'Observation'))")
     @Column(name = "category", nullable = false)
     private HobbyCategory category;
 
     @Enumerated(EnumType.STRING)
+//    @Column(name = "type", nullable = false, columnDefinition = "VARCHAR(60) CHECK (type IN ('Indendørs', 'Konkurrence', 'Observation', 'Udendørs', 'Samler hobbyer', 'Educational hobbies', '---', 'Indendørs/udendørs'))")
     @Column(name = "type", nullable = false)
+//    @Column(columnDefinition = "VARCHAR(60) CHECK (type IN ('Indendørs', 'Konkurrence', 'Observation', 'Udendørs', 'Samler hobbyer', 'Educational hobbies', '---', 'Indendørs/udendørs'))")
     private HobbyType type;
 
     @OneToMany(mappedBy = "hobby", cascade = CascadeType.MERGE, orphanRemoval = true)
