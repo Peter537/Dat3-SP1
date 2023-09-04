@@ -1,5 +1,6 @@
 package dat.config;
 
+import dat.model.*;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
@@ -41,7 +42,13 @@ public class HibernateConfig {
     private static EntityManagerFactory getEntityManagerFactory(Configuration configuration, Properties props) {
         configuration.setProperties(props);
         // TODO: addAnnotatedClasses(configuration, X.class, Y.class, Z.class);
-        addAnnotatedClasses(configuration);
+        addAnnotatedClasses(configuration,
+                Address.class,
+                Event.class,
+                Hobby.class,
+                Person.class,
+                PersonHobby.class,
+                Zip.class);
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         System.out.println("Hibernate Java Config serviceRegistry created");
