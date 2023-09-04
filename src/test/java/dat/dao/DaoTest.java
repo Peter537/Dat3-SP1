@@ -22,12 +22,13 @@ public class DaoTest {
     HobbyDAO hobbyDAO = HobbyDAO.getInstance();
     DAO<Address> addressDAO = new DAO<>();
     DAO<Zip> zipDAO = new DAO<>();
+    DAO<Event> eventDAO = new DAO<>();
 
 
     @BeforeEach
     void setUp() {
         // Create EntityManagerFactory
-        emf = HibernateConfig.getEntityManagerFactoryConfig("hobby");
+        emf = HibernateConfig.getEntityManagerFactoryConfig("Hobby");
 
         // Truncate database
         personDAO.setEntityManagerFactory(emf);
@@ -41,6 +42,9 @@ public class DaoTest {
 
         zipDAO.setEntityManagerFactory(emf);
         zipDAO.truncate(Zip.class);
+
+        eventDAO.setEntityManagerFactory(emf);
+        eventDAO.truncate(Event.class);
         // Insert test data
 
     }
@@ -298,24 +302,26 @@ public class DaoTest {
         Person person = createTestPerson(1);
         personDAO.save(person);
 
-        // Create new event
-        Event event = new Event()
-        event.setCreatedBy();
-        event.setEventDate(LocalDate.now());
-        event.setAddress(new Address("TestStreet", new Zip(3300, "Yes", "Yep", "Yup")));
-        event.setDescription("TestDescription");
-        event.setPrice(100.0);
-        event.setHobby(createTestHobby(1));
+        Hobby hobby = createTestHobby(1);
+        hobbyDAO.save(hobby);
 
-        Event event = new Event(person, new Hobby(), new Address("Horsebakken 5D"), "Test", 0.0, LocalDate.now());
+        Zip zip = new Zip(3300, "Yes", "Yep", "Yup");
+        zipDAO.save(zip);
+
+        Address address = new Address("TestStreet", zip);
+        addressDAO.save(address);
+
+
+
+        Event event = new Event(person, hobby,address, "Test", 0.0, LocalDate.now());
 
         // Create new person
-        Person person = new Person("Jensss", "Jensssen", "bruh@emasil.com", LocalDate.now(), "12345676", "12345618", "12345670");
-
 
         // Add person to event
         event.getAttendees().add(person);
-        DAO<Event> eventDAO = new DAO<>();
+        eventDAO.save(event);
+
+
 
         
 

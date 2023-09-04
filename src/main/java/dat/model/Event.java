@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -23,7 +24,7 @@ public class Event {
     private Person createdBy;
 
     @ManyToMany
-    private Set<Person> attendees;
+    private Set<Person> attendees = new HashSet<>();
 
     @ManyToOne
     private Hobby hobby;
@@ -61,6 +62,7 @@ public class Event {
     @PrePersist
     public void prePersist() {
         lastUpdated = LocalDate.now();
+        creationDate = LocalDate.now();
     }
 
     @PreUpdate
