@@ -155,13 +155,15 @@ public class DaoTest {
         Hobby hobby2 = createTestHobby(2);
         Hobby hobby3 = createTestHobby(3);
 
+        hobbyDAO.save(hobby1);
+        hobbyDAO.save(hobby2);
+        hobbyDAO.save(hobby3);
+
         // Get all hobbies from DB
         List<Hobby> hobbies = hobbyDAO.getAll(Hobby.class);
 
         // Check hobbies
         assertEquals(3, hobbies.size());
-
-        // Check count
     }
 
     @Test
