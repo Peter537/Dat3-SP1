@@ -1,7 +1,8 @@
 package dat.dao;
 
 import dat.config.HibernateConfig;
-import dat.dao.boilerplate.DAO;
+import dat.data.dao.PersonDAO;
+import dat.data.dao.boilerplate.DAO;
 import dat.model.*;
 import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.BeforeEach;
