@@ -19,18 +19,17 @@ public class Hobby {
     private int id;
 
     private String name;
+
+    @Column(name = "wiki_link")
     private String wikiLink;
-    private String category;
-    private String type;
+
+    @Enumerated(EnumType.STRING)
+    private HobbyCategory category;
+
+    @Enumerated(EnumType.STRING)
+    private HobbyType type;
 
     @ManyToMany(mappedBy = "hobbies", fetch = FetchType.EAGER)
     @ToString.Exclude
-    private Set<Person> persons = new HashSet<>();
-
-    public Hobby(String name, String wikiLink, String category, String type) {
-        this.name = name;
-        this.wikiLink = wikiLink;
-        this.category = category;
-        this.type = type;
-    }
+    private final Set<Person> persons = new HashSet<>();
 }

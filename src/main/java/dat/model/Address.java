@@ -17,24 +17,18 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "street")
     private String street;
-    private String city;
-    private String state;
-    private String country;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Zip zip;
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.MERGE)
-    private Set<Person> person = new HashSet<>();
+    @OneToMany(mappedBy = "address", cascade = CascadeType.MERGE, orphanRemoval = true)
+    private final Set<Person> person = new HashSet<>();
 
-
-    public Address(String street, String state, String country, Zip zip) {
+    public Address(String street, Zip zip) {
         this.street = street;
-        this.state = state;
-        this.country = country;
         this.zip = zip;
     }
-
 }
