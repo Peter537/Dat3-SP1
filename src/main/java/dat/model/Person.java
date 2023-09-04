@@ -55,11 +55,6 @@ public class Person {
     @Column(name = "creation_date")
     private LocalDate creationDate;
 
-    @PrePersist
-    private void prePersist() {
-        this.creationDate = LocalDate.now();
-    }
-
     public Person(String firstName, String lastName, String email, LocalDate birthDate, String homePhoneNumber, String workPhoneNumber, String mobilePhoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -68,6 +63,11 @@ public class Person {
         this.homePhoneNumber = homePhoneNumber;
         this.workPhoneNumber = workPhoneNumber;
         this.mobilePhoneNumber = mobilePhoneNumber;
+    }
+
+    @PrePersist
+    private void prePersist() {
+        this.creationDate = LocalDate.now();
     }
 
     public void addHobby(Hobby hobby, Integer rating) {
