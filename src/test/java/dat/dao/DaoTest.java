@@ -17,6 +17,8 @@ public class DaoTest {
 
     EntityManagerFactory emf;
     DAO<Person> personDAO = new DAO<>();
+    DAO<Hobby> hobbyDAO = new DAO<>();
+    
 
     @BeforeEach
     void setUp() {
@@ -27,7 +29,6 @@ public class DaoTest {
         personDAO.setEntityManagerFactory(emf);
         personDAO.truncate(Person.class);
 
-        DAO<Hobby> hobbyDAO = new DAO<>();
         hobbyDAO.setEntityManagerFactory(emf);
         hobbyDAO.truncate(Hobby.class);
 
@@ -86,9 +87,8 @@ public class DaoTest {
 
     @Test
     void testGetHobby() {
-        // Create new hobby
-
         // Get hobby from DB
+        Hobby hobbyFromDB = personDAO.findById(Hobby.class, 1);
 
         // Check fields
     }
