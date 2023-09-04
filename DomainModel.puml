@@ -67,7 +67,7 @@ package ConnectHobby {
   Hobby "n" --> "1" HobbyType : belongs to >
   Person "n" -- "m" Event : attends >
   Person "1" -- "n" Event : hosts >
-  Hobby "1" -- "n" Event : relates >
+  Hobby "1" -- "n" Event : relates to <
 }
 @enduml
 
