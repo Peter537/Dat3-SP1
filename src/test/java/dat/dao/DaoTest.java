@@ -223,6 +223,32 @@ public class DaoTest {
         // Check event
     }
 
+    @Test
+    void testGetEventByHobby() {
+        // Create new event
+
+        // Create new hobby
+
+        // Add hobby to event
+
+        // Get event from DB
+
+        // Check event
+    }
+
+    @Test
+    void testGetEventByPerson() {
+        // Create new event
+
+        // Create new person
+
+        // Add person to event
+
+        // Get event from DB
+
+        // Check event
+    }
+
 
 
     protected Person createTestPerson(int uniqueId) {
