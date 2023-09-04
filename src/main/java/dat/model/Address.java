@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @NoArgsConstructor
 @Getter
@@ -21,6 +24,9 @@ public class Address {
     @ManyToOne(cascade = CascadeType.MERGE)
     private Zip zip;
 
+    @OneToMany(mappedBy = "address", cascade = CascadeType.MERGE)
+    private Set<Person> person = new HashSet<>();
+
 
     public Address(String street, String state, String country, Zip zip) {
         this.street = street;
@@ -28,4 +34,5 @@ public class Address {
         this.country = country;
         this.zip = zip;
     }
+
 }
