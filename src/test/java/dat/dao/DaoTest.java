@@ -240,6 +240,8 @@ public class DaoTest {
     @Test
     void testGetPersonByEmail() {
         // Create 2 new person
+        Person person1 = createTestPerson(1);
+        Person person2 = createTestPerson(2);
 
         // Set email for 2 persons
 
