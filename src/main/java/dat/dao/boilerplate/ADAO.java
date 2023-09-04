@@ -22,7 +22,7 @@ abstract class ADAO<T> implements IDAO<T> { // TODO: Add tcf (try, catch, final)
     }
 
     // Queries
-    public T findById(Class<T> tClass, int id) {
+    public T findById(Class<T> tClass, Object id) {
         try (EntityManager entityManager = emf.createEntityManager()) {
             return entityManager.find(tClass, id);
         } catch (UnknownEntityException e) {
