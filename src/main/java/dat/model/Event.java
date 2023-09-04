@@ -38,4 +38,18 @@ public class Event {
     @Temporal(TemporalType.DATE)
     @Column(name = "event_date")
     private LocalDate eventDate;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "last_updated")
+    private LocalDate lastUpdated;
+
+    @PrePersist
+    public void prePersist() {
+        lastUpdated = LocalDate.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        lastUpdated = LocalDate.now();
+    }
 }
