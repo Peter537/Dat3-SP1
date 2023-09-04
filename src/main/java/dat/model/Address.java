@@ -19,9 +19,7 @@ public class Address {
     private int id;
     @Column(name = "street")
     private String street;
-    private String city;
-    private String state;
-    private String country;
+
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private Zip zip;
@@ -30,10 +28,10 @@ public class Address {
     private Set<Person> person = new HashSet<>();
 
 
-    public Address(String street, String state, String country, Zip zip) {
+
+
+    public Address(String street, Zip zip) {
         this.street = street;
-        this.state = state;
-        this.country = country;
         this.zip = zip;
     }
 
