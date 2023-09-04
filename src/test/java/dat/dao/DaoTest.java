@@ -9,9 +9,14 @@ import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class DaoTest {
 
     EntityManagerFactory emf;
+    DAO<Person> personDAO = new DAO<>();
 
     @BeforeEach
     void setUp() {
@@ -19,7 +24,6 @@ public class DaoTest {
         emf = HibernateConfig.getEntityManagerFactoryConfig("Hobby");
 
         // Truncate database
-        DAO<Person> personDAO = new DAO<>();
         personDAO.setEntityManagerFactory(emf);
         personDAO.truncate(Person.class);
 
@@ -38,32 +42,46 @@ public class DaoTest {
     @Test
     void testGetPerson() {
         // Create new person
+        Person person = createTestPerson();
+        personDAO.save(person);
 
         // Get person from DB
+        Person personFromDB = personDAO.findById(Person.class, person.getId());
 
         // Check fields
+        assertEquals(person.getFirstName(), personFromDB.getFirstName());
     }
 
     @Test
     void testUpdatePerson() {
         // Create new person
+        Person person = createTestPerson();
+        personDAO.save(person);
 
         // Update person
+        person.setFirstName("Test2");
+        personDAO.update(person);
 
         // Get person from DB
+        Person personFromDB = personDAO.findById(Person.class, person.getId());
 
         // Check fields
+        assertEquals(person.getFirstName(), personFromDB.getFirstName());
     }
 
     @Test
     void testDeletePerson() {
         // Create new person
+        Person person = createTestPerson();
+        personDAO.save(person);
 
         // Delete person
+        personDAO.delete(person);
 
-        // Get person from DB
+        // Get all persons from DB
+        int count = personDAO.getAll(Person.class).size();
 
-        // Check fields
+        assertEquals(0, count);
     }
 
     @Test
@@ -181,5 +199,19 @@ public class DaoTest {
         // Get hobbies with type from DB
 
         // Check hobbies
+    }
+
+
+
+    protected Person createTestPerson() {
+        Person person = new Person();
+        person.setFirstName("Test");
+        person.setLastName("Test");
+        person.setEmail("test@test.dk");
+        person.setBirthDate(LocalDate.of(2000, 1, 1));
+        person.setHomePhoneNumber("12345678");
+        person.setWorkPhoneNumber("12345678");
+        person.setMobilePhoneNumber("12345678");
+        return person;
     }
 }
