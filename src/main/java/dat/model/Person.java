@@ -51,6 +51,15 @@ public class Person {
     @ManyToOne
     private Address address;
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "creation_date")
+    private LocalDate creationDate;
+
+    @PrePersist
+    private void prePersist() {
+        this.creationDate = LocalDate.now();
+    }
+
     public Person(String firstName, String lastName, String email, LocalDate birthDate, String homePhoneNumber, String workPhoneNumber, String mobilePhoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
