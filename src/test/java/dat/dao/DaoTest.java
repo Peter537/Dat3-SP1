@@ -214,4 +214,13 @@ public class DaoTest {
         person.setMobilePhoneNumber("12345678");
         return person;
     }
+
+    protected Hobby createTestHobby() {
+        Hobby hobby = new Hobby();
+        hobby.setName("TestName");
+        hobby.setWikiLink("TestWikiLink");
+        hobby.setType(HobbyType.INDOOR);
+        hobby.setCategory(HobbyCategory.SPORTS);
+        return hobby;
+    }
 }
