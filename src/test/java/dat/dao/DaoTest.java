@@ -19,18 +19,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DaoTest {
 
-    EntityManagerFactory emf;
-    PersonDAO personDAO = PersonDAO.getInstance();
-    HobbyDAO hobbyDAO = HobbyDAO.getInstance();
-    DAO<Address> addressDAO = new DAO<>();
-    DAO<Zip> zipDAO = new DAO<>();
-    EventDAO eventDAO = EventDAO.getInstance();
+    private final PersonDAO personDAO = PersonDAO.getInstance();
+    private final HobbyDAO hobbyDAO = HobbyDAO.getInstance();
+    private final EventDAO eventDAO = EventDAO.getInstance();
 
+    private final DAO<Address> addressDAO = new DAO<>();
+    private final DAO<Zip> zipDAO = new DAO<>();
 
     @BeforeEach
     void setUp() {
         // Create EntityManagerFactory
-        emf = HibernateConfig.getEntityManagerFactoryConfig("Hobby");
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig("Hobby");
 
         // Truncate database
         personDAO.setEntityManagerFactory(emf);
@@ -47,8 +46,6 @@ public class DaoTest {
 
         eventDAO.setEntityManagerFactory(emf);
         eventDAO.truncate(Event.class);
-        // Insert test data
-
     }
 
     @Test
@@ -365,7 +362,6 @@ public class DaoTest {
 
         Event eventDB = eventDAO.findById(Event.class, event.getId());
         assertEquals(event.getId(), eventDB.getId());
-
     }
 
     @Test
@@ -467,7 +463,6 @@ public class DaoTest {
         List<Event> personFromDB = eventDAO.getEventsByPerson(person);
         assertEquals(person.getId(), personFromDB.get(0).getCreatedBy().getId());
     }
-
 
     protected Person createTestPerson(int uniqueId) {
         Person person = new Person();
