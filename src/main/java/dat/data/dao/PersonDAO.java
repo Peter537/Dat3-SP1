@@ -10,6 +10,18 @@ import java.util.List;
 
 public class PersonDAO extends DAO<Person> {
 
+    private static PersonDAO instance;
+
+    private PersonDAO() { }
+
+    public static PersonDAO getInstance() {
+        if (instance == null) {
+            instance = new PersonDAO();
+        }
+
+        return instance;
+    }
+
     public PhoneNumbersDTO getPhoneNumbers(int id) {
         try (EntityManager entityManager = super.getEntityManagerFactory().createEntityManager()) {
             entityManager.getTransaction().begin();

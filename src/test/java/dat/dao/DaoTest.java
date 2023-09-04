@@ -13,13 +13,13 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DaoTest {
 
     EntityManagerFactory emf;
-    PersonDAO personDAO = new PersonDAO();
-    HobbyDAO hobbyDAO = new HobbyDAO();
+    PersonDAO personDAO = PersonDAO.getInstance();
+    HobbyDAO hobbyDAO = HobbyDAO.getInstance();
     DAO<Address> addressDAO = new DAO<>();
     DAO<Zip> zipDAO = new DAO<>();
 
