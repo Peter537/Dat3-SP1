@@ -1,4 +1,4 @@
-package dat.dao.boilerplate;
+package dat.data.dao.boilerplate;
 
 /**
  * This class is a generic DAO (Data Access Object) that can be used to perform CRUD operations on any entity.

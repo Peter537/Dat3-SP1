@@ -1,4 +1,4 @@
-package dat.dao.boilerplate;
+package dat.data.dao.boilerplate;
 
 import jakarta.persistence.EntityManagerFactory;
 
@@ -13,9 +13,14 @@ interface IDAO<T> {
 
     /**
      *
-     * @param emf
+     * @param emf EntityManagerFactory
      */
     void setEntityManagerFactory(EntityManagerFactory emf);
+
+    /**
+     * @return EntityManagerFactory
+     */
+    EntityManagerFactory getEntityManagerFactory();
 
     /**
      *
@@ -23,7 +28,7 @@ interface IDAO<T> {
      * @param id
      * @return
      */
-    T findById(Class<T> tClass, int id);
+    T findById(Class<T> tClass, Object id);
 
     /**
      *

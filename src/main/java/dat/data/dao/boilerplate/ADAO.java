@@ -1,4 +1,4 @@
-package dat.dao.boilerplate;
+package dat.data.dao.boilerplate;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -21,8 +21,13 @@ abstract class ADAO<T> implements IDAO<T> { // TODO: Add tcf (try, catch, final)
         this.emf = emf;
     }
 
+    // Getters
+    public EntityManagerFactory getEntityManagerFactory() {
+        return emf;
+    }
+
     // Queries
-    public T findById(Class<T> tClass, int id) {
+    public T findById(Class<T> tClass, Object id) {
         try (EntityManager entityManager = emf.createEntityManager()) {
             return entityManager.find(tClass, id);
         } catch (UnknownEntityException e) {
@@ -86,14 +91,19 @@ abstract class ADAO<T> implements IDAO<T> { // TODO: Add tcf (try, catch, final)
 
             entityManager.getTransaction().commit();
 
-            // Restart sequence
-            entityManager.getTransaction().begin();
+            // Restart sequence if it exists
+            try {
+                entityManager.getTransaction().begin();
 
-            sql = "ALTER SEQUENCE " + tableName + "_id_seq RESTART WITH 1";
+                sql = "ALTER SEQUENCE " + tableName + "_id_seq RESTART WITH 1";
 
-            entityManager.createNativeQuery(sql).executeUpdate();
+                entityManager.createNativeQuery(sql).executeUpdate();
 
-            entityManager.getTransaction().commit();
+                entityManager.getTransaction().commit();
+            }
+            catch (Exception e) {
+                System.out.println("Sequence does not exist: " + tableName + "_id_seq");
+            }
         } catch (ConstraintViolationException e) {
             System.out.println("Constraint violation: " + e.getMessage());
         }

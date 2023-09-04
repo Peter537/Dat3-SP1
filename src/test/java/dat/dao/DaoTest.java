@@ -1,17 +1,26 @@
 package dat.dao;
 
 import dat.config.HibernateConfig;
-import dat.dao.boilerplate.DAO;
-import dat.model.Address;
-import dat.model.Hobby;
-import dat.model.Person;
+import dat.data.dao.PersonDAO;
+import dat.data.dao.boilerplate.DAO;
+import dat.data.dto.PhoneNumbersDTO;
+import dat.model.*;
 import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class DaoTest {
 
     EntityManagerFactory emf;
+    PersonDAO personDAO = new PersonDAO();
+    DAO<Hobby> hobbyDAO = new DAO<>();
+    DAO<Address> addressDAO = new DAO<>();
+    
+
 
     @BeforeEach
     void setUp() {
@@ -19,15 +28,12 @@ public class DaoTest {
         emf = HibernateConfig.getEntityManagerFactoryConfig("Hobby");
 
         // Truncate database
-        DAO<Person> personDAO = new DAO<>();
         personDAO.setEntityManagerFactory(emf);
         personDAO.truncate(Person.class);
 
-        DAO<Hobby> hobbyDAO = new DAO<>();
         hobbyDAO.setEntityManagerFactory(emf);
         hobbyDAO.truncate(Hobby.class);
 
-        DAO<Address> addressDAO = new DAO<>();
         addressDAO.setEntityManagerFactory(emf);
         addressDAO.truncate(Address.class);
 
@@ -38,72 +44,89 @@ public class DaoTest {
     @Test
     void testGetPerson() {
         // Create new person
+        Person person = createTestPerson(1);
+        personDAO.save(person);
 
         // Get person from DB
+        Person personFromDB = personDAO.findById(Person.class, person.getId());
 
         // Check fields
+        assertEquals(person.getFirstName(), personFromDB.getFirstName());
     }
 
     @Test
     void testUpdatePerson() {
         // Create new person
+        Person person = createTestPerson(1);
+        personDAO.save(person);
 
         // Update person
+        person.setFirstName("Test2");
+        personDAO.update(person);
 
         // Get person from DB
+        Person personFromDB = personDAO.findById(Person.class, person.getId());
 
         // Check fields
+        assertEquals(person.getFirstName(), personFromDB.getFirstName());
     }
 
     @Test
     void testDeletePerson() {
         // Create new person
+        Person person = createTestPerson(1);
+        personDAO.save(person);
 
         // Delete person
+        personDAO.delete(person);
 
-        // Get person from DB
+        // Get all persons from DB
+        int count = personDAO.getAll(Person.class).size();
 
-        // Check fields
+        assertEquals(0, count);
     }
 
     @Test
     void testGetHobby() {
         // Create new hobby
+        Hobby hobby = createTestHobby(1);
+        hobbyDAO.save(hobby);
 
         // Get hobby from DB
+        Hobby hobbyFromDB = hobbyDAO.findById(Hobby.class, hobby.getName());
 
         // Check fields
+        assertEquals(hobbyFromDB.getName(), hobby.getName());
     }
 
-    @Test
-    void testUpdateHobby() {
-        // Create new hobby
-
-        // Update hobby
-
-        // Get hobby from DB
-
-        // Check fields
-    }
 
     @Test
     void testDeleteHobby() {
         // Create new hobby
+        Hobby hobby = createTestHobby(1);
+        hobbyDAO.save(hobby);
 
         // Delete hobby
-
-        // Get hobby from DB
+        hobbyDAO.delete(hobby);
 
         // Check fields
+        assertEquals(0, hobbyDAO.getAll(Hobby.class).size());
     }
 
     @Test
-    void testGetPersonNumbers() { // TODO: DTO with phone numbers and ID
+    void testGetPersonNumbers() {
         // Create new person
+        Person person = createTestPerson(1);
+        personDAO.save(person);
 
         // Get phone numbers from person from DB
+        PhoneNumbersDTO phoneNumbersDTO = personDAO.getPhoneNumbers(person.getId());
 
         // Check phone numbers
+        assertEquals(person.getId(), phoneNumbersDTO.id());
+        assertEquals(person.getHomePhoneNumber(), phoneNumbersDTO.homeNumber());
+        assertEquals(person.getWorkPhoneNumber(), phoneNumbersDTO.workNumber());
+        assertEquals(person.getMobilePhoneNumber(), phoneNumbersDTO.mobileNumber());
     }
 
     @Test
@@ -181,5 +204,71 @@ public class DaoTest {
         // Get hobbies with type from DB
 
         // Check hobbies
+    }
+
+    @Test
+    void testCreateEvent() {
+        // Create new event
+
+        // Create new person
+
+        // Add person to event
+
+        // Create new hobby
+
+        // Add hobby to event
+
+        // Get event from DB
+
+        // Check event
+    }
+
+    @Test
+    void testGetEventByHobby() {
+        // Create new event
+
+        // Create new hobby
+
+        // Add hobby to event
+
+        // Get event from DB
+
+        // Check event
+    }
+
+    @Test
+    void testGetEventByPerson() {
+        // Create new event
+
+        // Create new person
+
+        // Add person to event
+
+        // Get event from DB
+
+        // Check event
+    }
+
+
+
+    protected Person createTestPerson(int uniqueId) {
+        Person person = new Person();
+        person.setFirstName("Test" + uniqueId);
+        person.setLastName("Test" + uniqueId);
+        person.setEmail("test" + uniqueId + "@test.dk");
+        person.setBirthDate(LocalDate.of(2000, 1, 1));
+        person.setHomePhoneNumber("1234567" + uniqueId);
+        person.setWorkPhoneNumber("1234567" + uniqueId);
+        person.setMobilePhoneNumber("1234567" + uniqueId);
+        return person;
+    }
+
+    protected Hobby createTestHobby(int uniqueId) {
+        return Hobby.builder()
+                .name("TestName" + uniqueId)
+                .wikiLink("TestWikiLink")
+                .type(HobbyType.INDOOR)
+                .category(HobbyCategory.GENEREL)
+                .build();
     }
 }
