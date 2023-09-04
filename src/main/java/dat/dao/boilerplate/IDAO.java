@@ -23,7 +23,7 @@ interface IDAO<T> {
      * @param id
      * @return
      */
-    T findById(Class<T> tClass, int id);
+    T findById(Class<T> tClass, Object id);
 
     /**
      *
