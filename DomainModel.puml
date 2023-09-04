@@ -32,15 +32,16 @@ package ConnectHobby {
      + HobbyID: int
      + Name: String
      + wikiLink: String
-     + Description: String
+     + Category: HobbyCategory
+     + Type: HobbyType
   }
 
-  enum Category {
+  enum HobbyCategory {
      + CategoryID: int
      + CategoryName: String
   }
 
-  enum Type {
+  enum HobbyType {
      + TypeID: int
      + TypeName: String
   }
@@ -62,8 +63,8 @@ package ConnectHobby {
   Person "n" --> "1" Address : lives at >
   Address "n" --> "1" ZipCode : is in >
   Person "1" -- "n" Hobby : has >
-  Hobby "n" --> "1" Category : belongs to >
-  Hobby "n" --> "1" Type : belongs to >
+  Hobby "n" --> "1" HobbyCategory : belongs to >
+  Hobby "n" --> "1" HobbyType : belongs to >
   Person "n" -- "m" Event : attends >
   Person "1" -- "n" Event : hosts >
   Hobby "1" -- "n" Event : relates >
