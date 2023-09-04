@@ -4,6 +4,7 @@ import dat.config.HibernateConfig;
 import dat.data.dao.HobbyDAO;
 import dat.data.dao.PersonDAO;
 import dat.data.dao.boilerplate.DAO;
+import dat.data.dto.HobbyWithPersonCountDTO;
 import dat.data.dto.PhoneNumbersDTO;
 import dat.model.*;
 import jakarta.persistence.EntityManagerFactory;
@@ -187,17 +188,43 @@ public class DaoTest {
 
      @Test
      void getAllHobbiesWithPersonCount() {
-        // TODO: Get all hobbies and the amount of people related to it, and store it in a DTO
-
          // Create 3 new hobby
+         Hobby hobby1 = createTestHobby(1);
+            Hobby hobby2 = createTestHobby(2);
+            Hobby hobby3 = createTestHobby(3);
+            hobbyDAO.save(hobby1);
+            hobbyDAO.save(hobby2);
+            hobbyDAO.save(hobby3);
 
         // Create 3 new person
+        Person person1 = createTestPerson(1);
+        Person person2 = createTestPerson(2);
+        Person person3 = createTestPerson(3);
+        personDAO.save(person1);
+        personDAO.save(person2);
+        personDAO.save(person3);
 
         // Set hobby for 2 persons
+        person1.addHobby(hobby1, 5);
+        person2.addHobby(hobby1, 3);
+        personDAO.update(person1);
+        personDAO.update(person2);
+        for (PersonHobby hobby : person1.getHobbies()) {
+            System.out.println(hobby.getHobby().getName());
+        }
 
         // Get all hobbies with person count from DB
+        List<HobbyWithPersonCountDTO> hobbies = hobbyDAO.getAllHobbiesWithPersonCount();
 
         // Check hobbies
+        assertEquals(3, hobbies.size());
+        for (HobbyWithPersonCountDTO hobby : hobbies) {
+            if (hobby.hobby().getName().equals("TestName1")) {
+                assertEquals(2, hobby.count());
+            } else {
+                assertEquals(0, hobby.count());
+            }
+        }
      }
 
     @Test
