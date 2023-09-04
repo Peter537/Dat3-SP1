@@ -42,7 +42,7 @@ public class DaoTest {
     @Test
     void testGetPerson() {
         // Create new person
-        Person person = createTestPerson();
+        Person person = createTestPerson(1);
         personDAO.save(person);
 
         // Get person from DB
@@ -55,7 +55,7 @@ public class DaoTest {
     @Test
     void testUpdatePerson() {
         // Create new person
-        Person person = createTestPerson();
+        Person person = createTestPerson(1);
         personDAO.save(person);
 
         // Update person
@@ -72,7 +72,7 @@ public class DaoTest {
     @Test
     void testDeletePerson() {
         // Create new person
-        Person person = createTestPerson();
+        Person person = createTestPerson(1);
         personDAO.save(person);
 
         // Delete person
@@ -86,18 +86,22 @@ public class DaoTest {
 
     @Test
     void testGetHobby() {
+        // Create new hobby
+        Hobby hobby = createTestHobby(1);
+        hobbyDAO.save(hobby);
+
         // Get hobby from DB
-        Hobby hobbyFromDB = hobbyDAO.findById(Hobby.class, "3D-udskrivning");
+        Hobby hobbyFromDB = hobbyDAO.findById(Hobby.class, hobby.getName());
 
         // Check fields
-        assertEquals(hobbyFromDB.getName(), "3D-udskrivning");
+        assertEquals(hobbyFromDB.getName(), hobby.getName());
     }
 
 
     @Test
     void testDeleteHobby() {
         // Create new hobby
-        Hobby hobby = createTestHobby();
+        Hobby hobby = createTestHobby(1);
         hobbyDAO.save(hobby);
 
         // Delete hobby
@@ -195,21 +199,21 @@ public class DaoTest {
 
 
 
-    protected Person createTestPerson() {
+    protected Person createTestPerson(int uniqueId) {
         Person person = new Person();
-        person.setFirstName("Test");
-        person.setLastName("Test");
-        person.setEmail("test@test.dk");
+        person.setFirstName("Test" + uniqueId);
+        person.setLastName("Test" + uniqueId);
+        person.setEmail("test" + uniqueId + "@test.dk");
         person.setBirthDate(LocalDate.of(2000, 1, 1));
-        person.setHomePhoneNumber("12345678");
-        person.setWorkPhoneNumber("12345678");
-        person.setMobilePhoneNumber("12345678");
+        person.setHomePhoneNumber("1234567" + uniqueId);
+        person.setWorkPhoneNumber("1234567" + uniqueId);
+        person.setMobilePhoneNumber("1234567" + uniqueId);
         return person;
     }
 
-    protected Hobby createTestHobby() {
+    protected Hobby createTestHobby(int uniqueId) {
         return Hobby.builder()
-                .name("TestName")
+                .name("TestName" + uniqueId)
                 .wikiLink("TestWikiLink")
                 .type(HobbyType.INDOOR)
                 .category(HobbyCategory.GENEREL)
