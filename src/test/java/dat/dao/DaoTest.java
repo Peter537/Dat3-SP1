@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DaoTest {
 
     EntityManagerFactory emf;
-    DAO<Person> personDAO = new DAO<>();
+    PersonDAO personDAO = new PersonDAO();
     DAO<Hobby> hobbyDAO = new DAO<>();
     DAO<Address> addressDAO = new DAO<>();
     
