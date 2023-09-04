@@ -32,12 +32,16 @@ Premium Abonnementer: Mens den grundlæggende platform kan være gratis, kan et 
 
 ## Domain Model
 Vi har lavet vores domænemodel i PlantUML, som kan ses i DomainModel.puml filen eller herunder:
+
 ![](DomainModel.png)
 
 
-
 ## EER-Diagram
+Vi har lavet vores EER diagram i pgAdmin, som kan ses herunder:
 
+![](EERDiagram.png)
+
+Det er helt utroligt grimt, vi vil gerne have noget guidance i hvordan vi kan gøre den pænere. Vores createscript kan ses i createscript-filen.
 
 ## Group Work
 
