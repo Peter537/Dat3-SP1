@@ -3,6 +3,7 @@ package dat.dao;
 import dat.config.HibernateConfig;
 import dat.data.dao.PersonDAO;
 import dat.data.dao.boilerplate.DAO;
+import dat.data.dto.PhoneNumbersDTO;
 import dat.model.*;
 import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -113,12 +114,19 @@ public class DaoTest {
     }
 
     @Test
-    void testGetPersonNumbers() { // TODO: DTO with phone numbers and ID
+    void testGetPersonNumbers() {
         // Create new person
+        Person person = createTestPerson(1);
+        personDAO.save(person);
 
         // Get phone numbers from person from DB
+        PhoneNumbersDTO phoneNumbersDTO = personDAO.getPhoneNumbers(person.getId());
 
         // Check phone numbers
+        assertEquals(person.getId(), phoneNumbersDTO.id());
+        assertEquals(person.getHomePhoneNumber(), phoneNumbersDTO.homeNumber());
+        assertEquals(person.getWorkPhoneNumber(), phoneNumbersDTO.workNumber());
+        assertEquals(person.getMobilePhoneNumber(), phoneNumbersDTO.mobileNumber());
     }
 
     @Test
