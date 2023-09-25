@@ -43,7 +43,7 @@ public class PersonDAO extends DAO<Person> {
     public List<Person> getAllByZip(Integer zip) {
         try (EntityManager entityManager = super.getEntityManagerFactory().createEntityManager()) {
             entityManager.getTransaction().begin();
-            List<Person> persons = entityManager.createQuery("SELECT p FROM Person p LEFT JOIN p.address address WHERE address IS NOT NULL OR address.zip.zip = :zip", Person.class)
+            List<Person> persons = entityManager.createQuery("SELECT p FROM Person p LEFT JOIN p.address address WHERE address IS NOT NULL OR address.zip.", Person.class)
                     .setParameter("zip", zip)
                     .getResultList();
             entityManager.getTransaction().commit();

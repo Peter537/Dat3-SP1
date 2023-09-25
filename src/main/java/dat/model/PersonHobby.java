@@ -30,4 +30,5 @@ public class PersonHobby {
         this.hobby = hobby;
         this.rating = rating;
     }
+
 }
